@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/favicon/favicon-5.png" sizes="32x32" />
+  <title>ADMIN</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav>
+    <img src="/assets/images/logo/logo-3.png" alt="">
+
+    <ul>
+        <h1><a class="" href="/admin">ADMIN PANEL</a></h1>
+    </ul>
+  </nav>
+  
+
+<form >
+    <h2>log in</h2>
+    <label for="email">email</label>
+    <input type="text" name="email" required>
+    <div class="email error"></div>
+    <label for="password">password</label>
+    <input type="password" name="password" required>
+    <div class="password error"></div>
+    <button>log in</button>
+</form>
+
+<script>
+const form = document.querySelector('form')
+    const emailError = document.querySelector('.email.error')
+    const passwordError = document.querySelector('.password.error')
+    
+
+    form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+
+        //reset to be blank
+        emailError.textContent = ''
+        passwordError.textContent = ''
+
+        //gettin the values from the form\
+        const email = form.email.value
+        const password =  form.password.value
+
+        //making a post request throgh fetch method
+        try{
+            const reslt = await fetch('/admin_login',{
+                method:'POST',
+                body: JSON.stringify({email,password}),
+                headers:{'Content-Type':'application/json'}
+            },)
+            const data = await reslt.json()
+            if(data.errors){
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            if(data.user){
+                location.assign('/admin')
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    })
+
+</script>
+
+<footer>Copyright 2023 smartshop</footer>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+
+<%- include('../partials/header'); -%>
+<section class="p-0">
+    <div class="common-block m-5">
+        <div id="accordion" class="accordion-style3">
+            <div class="common-block">
+                <div class="inner-title">
+                    <h4 class="mb-0">My Orders</h4></div>
+
+                    <div class="table-responsive ">
+                        <table class="table  bg-light">
+                            <thead>
+                                <tr>
+                                    <th>Order</th>
+                                    <th>Date</th>
+                                    <th>Order Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <%for(i=0;i<orders.length;i++){%>
+                                <tr>
+                                <tr>
+                                    <th>
+                                        #<%=orders[i].orderId%>
+                                    </th>
+                                    <td>
+                                        <p style="font-weight: bold;"><%=orders[i].createdAt.toLocaleDateString("en-AU")%></p>
+                                       
+                                    </td>
+                               
+                                    <td>
+                                        <%if(orders[i].orderStatus == "pending"){%>
+                                            <button type="button" style="border-radius: 3rem;" class="btn btn-warning btn-sm  disabled" ><%=orders[i].orderStatus%></button>
+                                        <%}else if(orders[i].orderStatus == 'comfirmed'){%>    
+                                            <button type="button" style="border-radius: 3rem;" class="btn btn-info btn-sm  disabled" ><%=orders[i].orderStatus%></button>
+                                        <%}else if(orders[i].orderStatus == 'delivered'){%>    
+                                            <button type="button" style="border-radius: 3rem;" class="btn btn-success btn-sm  disabled" ><%=orders[i].orderStatus%></button>
+                                        <%}else if(orders[i].orderStatus == 'cancelled'){%>    
+                                            <button type="button" style="border-radius: 3rem;" class="btn btn-danger btn-sm  disabled" ><%=orders[i].orderStatus%></button>
+                                        <%}%>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <%if(orders[i].payment_status == "pending"){%>
+                                                <button type="button" style="border-radius: 3rem;" class="btn btn-warning btn-sm  disabled" ><%=orders[i].payment_status%></button>
+                                            <%}else if(orders[i].payment_status == 'paid'){%>    
+                                                <button type="button" style="border-radius: 3rem;" class="btn btn-info btn-sm  disabled" ><%=orders[i].payment_status%></button>
+                                            <%}else if(orders[i].payment_status == 'refunded'){%>    
+                                                <button type="button" style="border-radius: 3rem;" class="btn btn-danger btn-sm  disabled" ><%=orders[i].payment_status%></button>
+                                            <%}else if(orders[i].payment_status == 'cancelled'){%>    
+                                                <button type="button" style="border-radius: 3rem;" class="btn btn-danger btn-sm  disabled" ><%=orders[i].payment_status%></button>
+                                            <%}%>
+                                        </span>
+                                    </td>
+                                    <td>$<%=orders[i].total%> </td>
+                                    <td>
+                                        <a href="/order?id=<%=orders[i].orderId%>" class="me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="far fa-edit text-primary"></i>
+                                        </a>
+                                        <a onclick="cancelOrder('<%=orders[i].orderId%>')"  data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                            <i class="far fa-trash-alt text-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+    
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+      async function cancelOrder(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let result = axios.put("/order/"+id,{
+                }).then((response)=>{
+                    if(response.data.cancel){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        .then((response)=>{
+                            window.location.reload()
+                        })
+                    }
+                    else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Item not deleted!',
+                    })
+                    }
+                })  
+            }
+        })
+        console.log("result haave come to the fround end")
+  }
+</script>
+
+
+<%- include('../partials/footer'); -%>
+
+

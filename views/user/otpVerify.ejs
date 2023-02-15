@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/favicon/favicon-5.png" sizes="32x32" />
+  <title>Ekka</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav>
+    <!-- <h1><a href="/">LOGIN PAGE</a></h1> -->
+    <img src="/assets/images/logo/logo-5.png" alt="">
+    <ul>
+      <li><a style="color:#fff;" href="" class="btn">signup</a></li>
+    </ul>
+  </nav>
+<form method="post" action="/otpVerify/<%=mobile%>" >
+    <h2>verify OTP</h2> 
+    <label for="mobile">otp</label>
+    <input type="mobile" name="userOtp" required >
+    <div class="mobile error"></div>
+    <button type="submit" style="color:#fff;">verify</button>
+</form>
+
+
+<footer>Copyright 2023 Ekka</footer>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<%- include('../partials/header'); -%>
+
+ <!-- Ec breadcrumb start -->
+ <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row ec_breadcrumb_inner">
+                    <div class="col-md-6 col-sm-12">
+                        <h2 class="ec-breadcrumb-title">Checkout</h2>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <!-- ec-breadcrumb-list start -->
+                        <ul class="ec-breadcrumb-list">
+                            <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="ec-breadcrumb-item active"><a href="/checkout">Checkout</a></li>
+                        </ul>
+                        <!-- ec-breadcrumb-list end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Ec breadcrumb end -->
+
+<!-- Ec checkout page -->
+<section class="md">
+    <div class="container">
+        <div class="row">
+      
+
+            <!-- left pannel section -->
+            <div class="col-lg-9 col-md-12 ps-2-3 mb-1-9 mb-lg-0">
+
+                <div class="common-block">
+
+                    <div class="inner-title">
+                        <h4 class="mb-0">Choose location for Delivery</h4>
+                    </div>
+
+                    <div id="accordion" class="accordion-style3">
+                        <%if(useraddress){%>
+                            <%for(i=0;i<useraddress.addreses.length;i++){%>
+                                <div class="card pt-2">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo<%=i%>" aria-expanded="false" aria-controls="collapseTwo<%=i%>">
+                                            <i class="fa-solid fa-map-location"></i> <%=useraddress.addreses[i].addres1%>
+                                        </button>
+                                    </h5>
+                                    </div>
+                                    <div id="collapseTwo<%=i%>" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                                        <div class="card-body">
+    
+                                            <h6 class="display-30 font-weight-600 mb-2">All detailes</h6>
+    
+                                            <form>
+    
+                                                <div class="row">
+    
+                                                </div>
+    
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <a href="#" class="m-link-muted">address2 : <%=useraddress.addreses[i].addres2%></a>
+                                                        <a href="#" class="m-link-muted">city : <%=useraddress.addreses[i].city%></a>
+                                                        <a href="#" class="m-link-muted">pincode : <%=useraddress.addreses[i].pincode%></a>
+                                                        <a href="#" class="m-link-muted">mobile : <%=useraddress.addreses[i].mobile%></a>
+                                                    </div>
+    
+                                                </div>
+                                          
+                                                <!-- <div class="form-check form-switch pt-3">
+                                                    
+                                                    <label for="">select</label>
+                                                    <input class="form-check-input"  type="checkbox" id="flexSwitchCheckDefault">
+                                                </div> -->
+                                                <div class="buttons-set">
+                                                    <a href="javasript:void(0)"  class="butn-style2 mt-3" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal<%=i%>">Edit <i class="fa-solid fa-pen-to-square"></i></a>
+                                                   <button> <a href="/payment/<%=useraddress.addreses[i]._id%>" class="butn-style2 wide">proceed</a></button>
+                                                </div>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                            <%}%>
+                     
+                    </div>
+                   
+                        <div class="buttons-set">
+                            <a href="/cart" class="butn-style2 wide"><i class="fas fa-arrow-left me-1"></i> Back</a>
+                           
+                           <button> <a href="javasript:void(0)"  class="butn-style2 mt-1" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_2">Add location </a></button>
+
+                        </div>
+
+                        <!-- <button class="btn btn-link collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"  ><a class="butn-style2 wide">Select a location</a></button> -->
+
+
+                </div>
+
+            </div>
+            <!-- end left pannel section -->
+
+            <!-- right pannel section -->
+            <div class="col-lg-3 col-12 side-bar">
+                <div class="widget">
+                    <div class="ec-sidebar-block">
+                        <div class="ec-sb-title">
+                            <h3 class="ec-sidebar-title">Summary</h3>
+                        </div>
+                        <div class="ec-sb-block-content">
+                            <div class="ec-checkout-summary">
+                               <%if(userCart){%>
+                                    <div>
+                                        <span class="text-left">Sub total</span>
+                                        <span class="text-right">$<%=userCart.total%>.00</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-left">Delivery Charges</span>
+                                        <span class="text-right">$00.00</span>
+                                    </div>
+                                    <div class="ec-checkout-summary-total">
+                                        <span class="text-left">Total Amount</span>
+                                        <span class="text-right">$<%=userCart.total%>.00</span>
+                                    </div>
+                               <%}else{%>
+                                    <div>
+                                        <span class="text-left">Sub total</span>
+                                        <span class="text-right">$00.00</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-left">Delivery Charges</span>
+                                        <span class="text-right">$00.00</span>
+                                    </div>
+                                    <div class="ec-checkout-summary-total">
+                                        <span class="text-left">Total Amount</span>
+                                        <span class="text-right">$00.00</span>
+                                    </div>
+                               <%}%> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end right pannel section -->
+
+
+        </div>
+    </div>
+</section>
+<!-- only for edit the address and update it  -->
+<%if(useraddress){%>
+    <%for(i=0;i<useraddress.addreses.length;i++){%>
+        <div class="modal fade" id="edit_modal<%=i%>" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="ec-vendor-block-img ">
+                                <div class="ec-vendor-upload-detail">
+                                    <form id="address" class="row g-3">
+                                       
+                                        <div class="col-md-12 space-t-15">
+                                            <label class="form-label">Address 1</label>
+                                            <input type="text" name="address1" required class="form-control" value="<%=useraddress.addreses[i].addres1%>">
+                                            <div class="address1 error"></div>
+                                        </div>
+                                        <div class="col-md-12 space-t-15">
+                                            <label class="form-label">Address 2</label>
+                                            <input type="text" name="address2" class="form-control" value="<%=useraddress.addreses[i].addres2%>">
+                                        </div>
+                                     
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">City</label>
+                                            <input type="text" name="city" required class="form-control" value="<%=useraddress.addreses[i].city%>">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Country</label>
+                                            <input type="text" name="country" required class="form-control" value="<%=useraddress.addreses[i].country%>">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Pincode</label>
+                                            <input type="text" name="pincode" required class="form-control" value="<%=useraddress.addreses[i].pincode%>">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Phone number</label>
+                                            <input type="text" name="mobile" required class="form-control" value="<%=useraddress.addreses[i].mobile%>">
+                                        </div>
+                                        <div class="col-md-12 space-t-15 pt-3">
+                                            <a href="/update"><button type="submit" class="btn btn-primary">Update</button></a>
+                                            <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
+                                                aria-label="Close">Close</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}%>
+<%}%>        
+
+
+
+<!-- //this for the if there is not any address then user can create so for that -->
+<div class="modal fade" id="edit_modal_2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ec-vendor-block-img ">
+                        <div class="ec-vendor-upload-detail">
+                            <form method="post" action="/address/<%=user._id%>" id="address" class="row g-3">
+                               
+                                <div class="col-md-12 space-t-15">
+                                    <label class="form-label">Address 1</label>
+                                    <input type="text" name="address1" required class="form-control">
+                                </div>
+                                <div class="col-md-12 space-t-15">
+                                    <label class="form-label">Address 2</label>
+                                    <input type="text" name="address2" class="form-control" placeholder="Address">
+                                </div>
+                             
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">City</label>
+                                    <input type="text" name="city" required class="form-control" placeholder="City">
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">Country</label>
+                                    <input type="text" name="country" required class="form-control" placeholder="Country">
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">Pincode</label>
+                                    <input type="text" name="pincode" required class="form-control" placeholder="Pincode">
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">Phone number</label>
+                                    <input type="text" name="mobile" required class="form-control" placeholder="Phone Number">
+                                </div>
+                                <div class="col-md-12 space-t-15 pt-3">
+                                    <a><button type="submit" class="btn btn-primary">Add location</button></a>
+                                    <a class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
+                                        aria-label="Close">Close</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer'); -%>
+
+

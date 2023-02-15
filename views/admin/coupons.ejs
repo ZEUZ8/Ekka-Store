@@ -1,0 +1,228 @@
+<%- include('../admin-partials/header'); -%>
+
+<div class="page-inner">
+
+    <!-- PAGE MAIN WRAPPER
+    ================================================== -->
+    <div id="main-wrapper">
+        <!-- row -->
+        <div class="row align-items-center grid-margin">
+            <div class="col-12">
+                <div class="card card-white">
+                    <div class="card-body row align-items-center">
+                        <div class="col-12 col-md-4">
+                            <h4 class="mb-4 mb-md-0">Coupons</h4>
+                        </div>
+
+                        <!-- <div class="col-12 col-md-8">
+                            <div class="row">
+                                <div class="col-md-3 mb-3 mb-md-0">
+                                    <select class="form-control form-select">
+                                        <option>Status</option>
+                                        <option>Active</option>
+                                        <option>revoked</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3 mb-md-0">
+                                    <select class="form-control form-select">
+                                        <option>Order Limits</option>
+                                        <option>Last 7 Orders</option>
+                                        <option>Last 15 Orders</option>
+                                        <option>Last 30 Orders</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" placeholder="search by name" />
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card card-white">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-order">
+                                <thead>
+                                    <tr>
+                                        <!-- <th scope="col">
+                                            <div class="custom-control custom-checkbox mb-0">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck" />
+                                            </div>
+                                        </th> -->
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">quantity</th>
+                                        <th scope="col">Creation Date</th>
+                                        <th scope="col">Expiration Date</th>
+                                        <th scope="col">Status</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <%if(coupons){%>
+                                    <%for(i=0;i<coupons.length;i++){%>
+                                <tbody>
+                                    <tr>
+                                        <!-- <th scope="row">
+                                            <div class="custom-control custom-checkbox mb-0">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                                            </div>
+                                        </th> -->
+                                        <td><%=coupons[i].couponTitle%></td>
+                                        <td><%=coupons[i].couponCode%></td>
+                                        <td><%=coupons[i].discount%></td>
+                                        <td><%=coupons[i].discountType%></td>
+                                        <td>
+                                            <div class="progress-text">
+                                                <div><%=coupons[i].qunatity %> remaining</div>
+                                            </div>
+                                        </td>
+                                        
+                                        <td><%=coupons[i].startDate.toLocaleDateString("en-AU")%></td>
+                                        
+                                        <td><%=coupons[i].endDate.toLocaleDateString("en-AU")%></td>
+                                       
+
+
+                                        <%if(coupons[i].couponStatus){%>
+                                            <td><a href="/Disable/<%=coupons[i]._id%>"><i class="fas fa-circle text-success me-2 f-s-10"></i>Active</a></td>
+                                        <%}else{%>
+                                            <td><a href="/Active/<%=coupons[i]._id%>"><i class="fas fa-circle text-danger me-2 f-s-10"></i>Revoked</a></td>
+                                        <%}%>    
+                                        <!-- <td><i class="fas fa-circle text-success me-2 f-s-10"></i>Active</td> -->
+                                        <td>
+                                            <a href="javasript:void(0)" data-link-action="editmodal" data-bs-toggle="modal" data-bs-target="#edit_modal<%=i%>"  class="me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                                <i class="far fa-edit text-primary"></i>
+                                            </a>
+                                         
+                                            
+                                            <a onclick="remove('<%=coupons[i]._id%>')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                <i class="far fa-trash-alt text-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                                <%}%>    
+                                <%}%>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        
+    </div>
+    <div class="page-footer">
+        <p>Copyright &copy; <span class="current-year"></span> Ekka All rights reserved.</p>
+    </div>
+</div>
+
+
+<%for(i=0;i<coupons.length;i++){%>
+    <div class="modal fade" id="edit_modal<%=i%>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-body">
+                    <h1 class="p-3 text-muted text-center">Edit The Coupon</h1>
+                    <div class="row">
+                        <div class="ec-vendor-block-img space-bottom-30">
+                       
+                            <form action="/profile" method="post">
+                                <div class="ec-vendor-upload-detail">
+                                    <div class="row g-3">
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Coupon Name</label>
+                                            <input type="text" name="couponTitle" value="<%=coupons[i].couponTitle%>" required class="form-control">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Coupon Code</label>
+                                            <input type="text" name="couponCode" value="<%=coupons[i].couponCode%>" required class="form-control">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Discount</label>
+                                            <input type="text" name="couponQuantity"  value="<%=coupons[i].discount%>" required class="form-control">
+                                        </div>
+                                        
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Type</label>
+                                            <select class="form-select form-control" id="validationCustom02"  name="couponType" required aria-label="Default select example">
+                                                <option  selected>Select Discount Type</option>
+                                                <option value="percent" >Percent</option>
+                                                <option value="fixed">Fixed</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Start Date</label>
+                                            <input type="date" name="startDate" value="<%=coupons[i].couponTitle%>" required  class="form-control">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Expiry Date</label>
+                                            <input type="date" name="endDate" value="<%=coupons[i].couponTitle%>" required  class="form-control">
+                                        </div>
+                                        <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Quantity</label>
+                                            <input type="boolean" name="startDate" required  value="<%=coupons[i].qunatity%>" class="form-control">
+                                        </div>
+                                        <!-- <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Status</label>
+                                            <input type="" name="status" required  value="<%=coupons[i].couponStatus%>" class="form-control">
+                                        </div> -->
+                                        
+                                        <div class="col-md-12 space-t-15 pt-2">
+                                            <h3>
+                                                <span class="badge rounded-pill bg-info">Update</span>
+                                                <span class="badge rounded-pill bg-secondary   qty_close" data-bs-dismiss="modal"
+                                                aria-label="Close">Close</span>
+    
+                                            </h3>
+                                            <!-- <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
+                                                aria-label="Close">Close</a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+<%}%>    
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    async function remove(id){
+      let result = axios.delete('/remove/'+id,{
+      }).then((response)=>{
+        if(!response.result){
+          Swal.fire('coupon removed')
+          .then(window.location.reload())
+        }
+        else{
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Coupon not deleted!',
+          })
+        }
+        })  
+  }
+</script>
+
+<%- include('../admin-partials/footer'); -%>

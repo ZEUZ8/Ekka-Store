@@ -1,0 +1,329 @@
+ <%- include('../partials/header'); -%>
+ <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css" />
+ <link rel="stylesheet" href="/admin/plugins/font-awesome/css/font-awesome.min.css" />
+ <link rel="stylesheet" href="/admin/plugins/icomoon/style.css" />
+ <link rel="stylesheet" href="/admin/plugins/uniform/css/default.css" />
+ <link rel="stylesheet" href="/admin/plugins/switchery/switchery.min.css" />
+
+ <!-- theme core css -->
+ <link rel="stylesheet" href="/admin/css/styles.css" />
+
+<section class="pt-3">
+    <div class="page-inner">
+
+        <!-- PAGE MAIN WRAPPER
+        ================================================== -->
+        <div id="main-wrapper">
+            <!-- row -->
+            
+            <!-- end row -->
+    
+            <!-- row -->
+            <div class="row g-xl-3">
+                <div class="col-lg-12 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Products</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mb-0 order-details-table">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="ps-4 id">image</th>
+                                            <th class="name">Name</th>
+                                            <th class="text-end cost">Cost</th>
+                                            <th class="text-end qty">Qty</th>
+                                            <th class="text-end total">View</th>
+                                   
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%if(order){%>
+                                            <%if(order.products.length >= 1){%>    
+                                                <%for(i=0;i<order.products.length;i++){%> 
+                                                    <tr>
+                                                        <td>
+                                                            <div class="image">
+                                                                <div><img style="width: 100px; height: 90px;" src="/images/uploads/<%=order.products[i].product.image[0]%>"  alt=""></div>
+                                                            </div>
+                                                        </td>
+                                                        <td><a href="#"><%=order.products[i].product.name%></a></td>
+                                                        <td class="text-end">$<%=order.products[i].product.price%></td>
+                                                        <td class="text-end"><%=order.products[i].quantity%></td>
+                                                        <td class="text-end">$<%=order.products[i].price%></td>
+                                                    </tr>
+                                                
+                                                <%}%>
+                                            <%}else{%>
+                                                    <div>
+                                                        <h3 style="color: red;" class="emp-cart-msg">NO ORDER</h3>
+                                                    </div>
+                                            <%}%> 
+                                        <%}else{%>
+                                            <div>
+                                                <h3 style="color: red;" class="emp-cart-msg">NO ORDER</h3>
+                                            </div>
+                                        <%}%>  
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row justify-content-end flex-column flex-lg-row mt-5">
+                                <div class="col-auto me-5">
+                                    <h6 class="fw-bold mb-2">Items Subtotal</h6>
+                                    <span class="d-flex align-items-center">
+                                      
+                                        <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                        <b>$<%=order.total%></b>
+                                    </span>
+                                </div>
+                                <div class="col-auto me-5">
+                                    <h6 class="fw-bold mb-2">Shipping</h6>
+                                    <span class="d-flex align-items-center">
+                                        Flat Rate
+                                        <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                        <b>$00.00</b>
+                                    </span>
+                                </div>
+                                <%if(order.usedCoupon){%>
+                                    <div class="col-auto">
+                                        <h6 class="fw-bold mb-2">used Coupon</h6>
+                                        <span class="d-flex align-items-center justify-content-lg-end">
+                                            <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                            <strong><%=order.usedCoupon%></strong>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-auto">
+                                        <h6 class="fw-bold mb-2">Order Total</h6>
+                                        <span class="d-flex align-items-center justify-content-lg-end">
+                                            <strong>$<%=order.finalPrice%></strong>
+                                            <i class="fas fa-chevron-right f-s-11 text-primary px-3"></i>
+                                        </span>
+                                    </div>
+                                <%}else{%>    
+                                <div class="col-auto">
+                                    <h6 class="fw-bold mb-2">Order Total</h6>
+                                    <span class="d-flex align-items-center justify-content-lg-end">
+                                        <strong>$<%=order.total%></strong>
+                                    </span>
+                                </div>
+                                <%}%>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+    
+            <!-- row -->
+            <div class="row g-xl-3">
+                <div class="col-xl-4 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Shipping Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2">
+                                            <p class="m-0"><%=user.name%></p>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Address:</th>
+                                        <td><%=address[0].addreses.addres1%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email :</th>
+                                        <td><%=user.email%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Mobile :</th>
+                                        <td><%=user.mobile%></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-6 col-xl-4 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Billing Information</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless table-sm mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Payment Type:</th>
+                                        <td>Credit Card</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Provider :</th>
+                                        <td>Visa ending in 2851</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Valid Date :</th>
+                                        <td>02/2021</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">CVV :</th>
+                                        <td>xxx</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-lg-6 col-xl-4 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Delivery Info</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="my-2">
+                                    <i class="fas fa-truck-moving h1 text-muted"></i>
+                                </div>
+                                <h5><b>UPS Delivery</b></h5>
+                                <div class="mt-2 pt-1">
+                                    <p class="mb-1"><span>Order ID :</span><%=order.orderId%></p>
+                                    <p class="mb-0"><span>Payment Mode :</span><%=order.payment_method%></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <div class="col-lg-6 col-xl-4 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Order Management</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-borderless table-sm mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th  scope="row">Cancel Order :</th>
+                                        <%if(order.orderStatus == 'cancelled'){%>
+                                            <td> <a href=""><span onclick="cancelling('error')" class="badge rounded-pill bg-soft-orange">CANCEL ORDER</span></a></td>
+                                        <%}else{%>
+                                            <td> <a href=""><span onclick="cancelling('<%=order._id%>')" class="badge rounded-pill bg-soft-pink">CANCEL ORDER</span></a></td>
+                                        <%}%>  
+                                    </tr>
+                                    <tr>
+                                        <th  scope="row">RETURN :</th>
+                                        <%if(order.orderStatus == 'delivered'){%>
+                                            <td> <a href=""><span onclick="returning('<%=order._id%>')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
+                                        <%}else{%>
+                                            <td> <a href=""><span onclick="returning('error')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
+                                        <%}%>  
+                                    </tr>
+                                    <tr>
+                                        <th  scope="row">Invoice :</th>
+                                        <td> <a href=""><span class="badge rounded-pill bg-info">DOWNLOAD</span></a></td>
+                                    </tr>
+                                    <tr>
+                                        <th  scope="row">Back Home :</th>
+                                       <td> <a href="/"><span class="badge rounded-pill bg-soft-green">BACK HOME</span></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    
+        </div>
+    
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    async function returning(id){
+        event.preventDefault()
+        if(id == 'error'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `You Can't Return Before Order Delivered!`,
+            })
+            console.log("this is the error that you lokking")
+        }
+        else{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Retrun it!'
+            }).then((result) => {
+                axios.put(`/return?id=${id}`)
+                .then((response)=>{
+                console.log("this itme status changed")
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                }
+                })
+            })
+        }
+    }
+    //function for the item cancel the and showing alert if its already cancelled 
+    async function cancelling(id){
+        if(id == 'error'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Item already Returned!`,
+            })
+            console.log("error at the cancelig a profuct ")
+        }else{
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Retrun it!'
+            }).then((result) => {
+                axios.put(`/cancel?id=${id}`)
+                .then((response)=>{
+                console.log("cancelled")
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your Order cancelled.',
+                    'success'
+                    )
+                }
+                })
+            })
+        }
+    }
+</script>
+<!--  axios.put(`/return?id=${id}`)
+            .then((response)=>{
+                console.log("this itme status changed")
+
+            }) -->
+
+<%- include('../partials/footer'); -%>
+
+
+
+
+

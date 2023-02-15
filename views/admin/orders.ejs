@@ -1,0 +1,198 @@
+<script src="https://kit.fontawesome.com/c6164394bf.js" crossorigin="anonymous"></script>
+<%- include('../admin-partials/header'); -%>
+
+
+
+<div class="page-inner">
+
+    <!-- PAGE MAIN WRAPPER
+    ================================================== -->
+    <div id="main-wrapper">
+        <!-- row -->
+        <div class="row align-items-center grid-margin">
+            <div class="col-12">
+                <div class="card card-white">
+                    <div class="card-body row align-items-center">
+                        <div class="col-12 col-md-4 mb-4 mb-md-0">
+                            <h4 class="mb-0">Orders</h4>
+                        </div>
+
+                        <!-- <div class="col-12 col-md-8">
+                            <div class="row">
+                                <div class="col-md-3 mb-3 mb-md-0">
+                                    <select class="form-control form-select">
+                                        <option>Status</option>
+                                        <option>Deliveres</option>
+                                        <option>Pending</option>
+                                        <option>Processing</option>
+                                        <option>Failed</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3 mb-md-0">
+                                    <select class="form-control form-select">
+                                        <option>Order Limits</option>
+                                        <option>Last 7 Orders</option>
+                                        <option>Last 15 Orders</option>
+                                        <option>Last 30 Orders</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" placeholder="search by name" />
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 grid-margin">
+                <div class="card card-white h-100">
+                    <div class="card-heading clearfix">
+                        <h4 class="card-title">Latest Transaction</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <!-- <th>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">&nbsp;</label>
+                                            </div>
+                                        </th> -->
+                                        <th>Order ID</th>
+                                        <th>Billing Name</th>
+                                        <th>Date</th>
+                                        <th>Total</th>
+                                        <th>Payment Method</th>
+                                        <th>Payment Status</th>
+                                        <th>Order Status</th>
+                                        <!-- <th>View Details</th> -->
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%if(orders){%>
+                                        <%for(i=0;i<orders.length;i++){%>
+                                            <tr>
+                                                <td>#<%=orders[i].orderId%> </td>
+                                                <td><%=orders[i].userId.name%></td>
+                                                <td>
+                                                    <%=orders[i].createdAt.toLocaleDateString("en-AU") %>
+
+                                                </td>
+                                                <td>
+                                                    $<%=orders[i].finalPrice%>
+                                                </td>
+                                                <td>
+                                                    <%if(orders[i].payment_method == 'COD'){%>
+                                                        <i class="fa-solid fa-hand-holding-dollar"></i>  C O D
+                                                        
+                                                    <%}else{%>
+                                                        <i class="fab fa-cc-paypal me-1"></i> Paypal
+                                                    <%}%>        
+                                                </td>
+                                                <td>
+                                                    <%if(orders[i].payment_status == 'pending'){%>
+                                                        <span class="badge rounded-pill bg-soft-orange"><%=orders[i].payment_status%></span>
+                                                    <%}else if(orders[i].payment_status == 'paid'){%>
+                                                        <span class="badge rounded-pill bg-soft-green"><%=orders[i].payment_status%></span>
+                                                    <%}else if(orders[i].payment_status == 'cancelled'){%>  
+                                                        <span class="badge rounded-pill bg-soft-pink"><%=orders[i].payment_status%></span>  
+                                                    <%}else if(orders[i].payment_status == 'refunded'){%>  
+                                                        <span class="badge rounded-pill bg-soft-pink"><%=orders[i].payment_status%></span>
+                                                    <%}%> 
+                                                </td>
+                                                <td>
+                                                    <!-- <i class="fab fa-cc-paypal me-1"></i> Paypal -->
+                                                    <%if(orders[i].orderStatus == 'pending'){%>
+                                                        <span class="badge rounded-pill bg-soft-orange"><%=orders[i].orderStatus%></span>
+                                                    <%}else if(orders[i].orderStatus == 'confirmed'){%>
+                                                        <span class="badge rounded-pill bg-info"><%=orders[i].orderStatus%></span>
+                                                    <%}else if(orders[i].orderStatus == 'delivered'){%>  
+                                                        <span class="badge rounded-pill bg-soft-green"><%=orders[i].orderStatus%></span>  
+                                                    <%}else if(orders[i].orderStatus == 'cancelled'){%>  
+                                                        <span class="badge rounded-pill bg-soft-pink"><%=orders[i].orderStatus%></span>
+                                                    <%}%> 
+                                                    
+                                                </td>
+                                                <td>
+                                                    <a href="/orderDetails?id=<%=orders[i].orderId%>" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                        <i class="far fa-edit text-primary"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <%}%>   
+                                    <%}else{%>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <h2 style="color: red;">NO ORDERS</h2>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <%}%>    
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+
+    <div class="page-footer">
+        <p>Copyright &copy; <span class="current-year"></span> Ekka All rights reserved.</p>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="edit_modal_2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ec-vendor-block-img space-bottom-30">
+                        <div class="ec-vendor-upload-detail">
+                            <form  id="address" class="row g-3">
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">PENDING</label>
+                                    <span  class="badge rounded-pill bg-soft-orange">PENDING</span>
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">CONFERMED</label>
+                                    <span class="badge rounded-pill bg-info">CONFERMED</span>
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">DELIVERED</label>
+                                    <span class="badge rounded-pill bg-soft-green">DELIVERED</span>
+                                </div>
+                                <div class="col-md-6 space-t-15">
+                                    <label class="form-label">CANCELLED</label>
+                                    <span class="badge rounded-pill bg-soft-pink">CANCELLED</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include('../admin-partials/footer'); -%>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from smartshop.websitelayout.net/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Jan 2023 16:00:16 GMT -->
+<head>
+    <!-- metas -->
+    <meta charset="utf-8" />
+    <meta name="author" content="Chitrakoot Web" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="keywords" content="admin,dashboard" />
+    <meta name="description" content="Smartshop - Responsive eCommerce Admin Dashboard" />
+
+    <!-- title  -->
+    <title>Smartshop - Responsive eCommerce Admin Dashboard</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon/favicon-5.png" />
+    <link rel="apple-touch-icon" href="/admin/img/logos/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/admin/img/logos/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/admin/img/logos/apple-touch-icon-114x114.png" />
+
+    <script src="https://kit.fontawesome.com/c6164394bf.js" crossorigin="anonymous"></script>
+    <!-- common plugins -->
+    <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/admin/plugins/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/admin/plugins/icomoon/style.css" />
+    <link rel="stylesheet" href="/admin/plugins/uniform/css/default.css" />
+    <link rel="stylesheet" href="/admin/plugins/switchery/switchery.min.css" />
+
+    <!-- theme core css -->
+    <link rel="stylesheet" href="/admin/css/styles.css" />
+
+</head>
+
+<body>
+
+    <!-- PAGE LOADING
+    ================================================== -->
+    <div id="preloader"></div>
+
+    <!-- PAGE CONTAINER
+    ================================================== -->
+    <div class="page-container">
+
+        <!-- PAGE SIDEBAR
+        ================================================== -->
+        <div class="page-sidebar">
+            <a class="logo-box" href="/admin">
+                <img src="/assets/images/logo/logo-5.png" alt="...">
+                <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
+                <i class="icon-close" id="sidebar-toggle-button-close"></i>
+            </a>
+            <div class="page-sidebar-inner">
+                <div class="page-sidebar-menu">
+                    <ul class="accordion-menu">
+                        <li>
+                            <a href="/admin"> <i class="menu-icon icon-home4"></i><span>Dashboard</span> </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon icon-inbox"></i><span>Category</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+                                <li><a href="/admin/category">Category</a></li>
+                                <li><a href="/admin/add_categoies">Add Categories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon icon-layers"></i><span>Products</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+
+                                <li><a href="/admin/products">Products</a></li>
+                                
+
+                                <li><a href="/add_product">Add Products</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon icon-flash_on"></i><span>Orders</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+                                <li><a href="/orders">Orders</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/admin/admin_custormers"> <i class="menu-icon icon-code"></i><span>Customers</span> </a>
+                        </li>
+
+                        <li>
+                            <a href="/banner"> <i class="menu-icon fa-solid fa-ticket"></i></i><span>Banners</span> </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon icon-format_list_bulleted"></i><span>Coupons</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+                                <li><a href="/adminCoupons">Coupons</a></li>
+                                <li><a href="/createCoupon">Create Coupons</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa-sharp fa-solid fa-chart-simple menu-icon"></i><span>Reports</span> <i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+                                <li><a href="/yearlyreport">Yearly Report</a></li>
+                                <li><a href="/monthlyreport">Monthly Report</a></li>
+                                <li><a href="/dailyreport">Daily Report</a></li>
+                            </ul>
+                        </li>
+                        
+                     
+                      
+                        <li>
+                            <a href="#">
+                                <i class="menu-icon icon-settings"></i><span>Settings</span><i class="accordion-icon fa fa-angle-left"></i>
+                            </a>
+                            <ul>
+                                <li><a href="staff-members.html">Staff Members</a></li>
+                                <li><a href="add-staff-member.html">Add Staff Members</a></li>
+                                <li><a href="site-settings.html">Site Settings</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-divider"></li>
+                        <li>
+                            <a href="/admin/admin_logout"> <i class="menu-icon icon-public"></i><span>Logout</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE CONTENT
+        ================================================== -->
+        <div class="page-content">
+
+            <!-- PAGE HEADER
+            ================================================== -->
+            <div class="page-header">
+                <div class="search-form">
+                    <form action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control search-input" placeholder="Type something...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="close-search" type="button"><i class="icon-close"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <div class="logo-sm">
+                                <a href="/admin" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
+                                <a class="logo-box" href="/admin"><img src="../img/logos/logo.png" class="logo" alt="..."></a>
+                            </div>
+                            <button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
+                                <li><a href="#" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
+                                <li><a href="#" id="search-button"><i class="fa fa-search"></i></a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
+                                    <ul class="dropdown-menu dropdown-lg dropdown-content">
+                                        <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
+                                        <li class="slimscroll dropdown-notifications">
+                                            <ul class="list-unstyled dropdown-oc">
+                                                <li>
+                                                    <a href="#"><span class="notification-badge bg-primary"><i class="far fa-image"></i></span>
+                                                        <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
+                                                            <small class="notification-date">20:00</small>
+                                                        </span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><span class="notification-badge bg-primary"><i class="fa fa-at"></i></span>
+                                                        <span class="notification-info"><b>John Doe</b> mentioned you in a post "Update v1.5".
+                                                            <small class="notification-date">06:07</small>
+                                                        </span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><span class="notification-badge bg-danger"><i class="fa fa-bolt"></i></span>
+                                                        <span class="notification-info">4 new special offers from the apps you follow!
+                                                            <small class="notification-date">Yesterday</small>
+                                                        </span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="#"><span class="notification-badge bg-success"><i class="fa fa-bullhorn"></i></span>
+                                                        <span class="notification-info">There is a meeting with <b>Ethan</b> in 15 minutes!
+                                                            <small class="notification-date">Yesterday</small>
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown user-dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="img/avatars/user-dropdown.jpg" alt="..." class="rounded-circle"></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Profile</a></li>
+                                        <li><a href="#">Calendar</a></li>
+                                        <li><a href="#"><span class="badge float-end badge-danger">42</span>Messages</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Account Settings</a></li>
+                                        <li><a href="#">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>

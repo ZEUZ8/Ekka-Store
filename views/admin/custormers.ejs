@@ -1,0 +1,117 @@
+<%- include('../admin-partials/header'); -%>
+
+ <!-- PAGE INNER
+            ================================================== -->
+            <div class="page-inner">
+
+                <!-- PAGE MAIN WRAPPER
+                ================================================== -->
+                <div id="main-wrapper">
+                    <!-- row -->
+                    <div class="row align-items-center grid-margin">
+                        <div class="col-12">
+                            <div class="card card-white">
+                                <div class="card-body row align-items-center">
+                                    <div class="col-12 col-md-5 mb-4 mb-md-0">
+                                        <h4 class="mb-0">Customers</h4>
+                                    </div>
+
+                                    <div class="col-12 col-md-7">
+
+                                        <div class="row">
+
+                                            <div class="col-md-8 mb-3 mb-md-0">
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="exampleInputEmail1" placeholder="search by name">
+                                            </div>
+
+                                            <!-- <div class="col-md-4">
+                                                <select class="form-control form-select">
+                                                    <option>Order Amount</option>
+                                                    <option>Highest To Lowest</option>
+                                                    <option>Lowest To Highest</option>
+                                                </select>
+                                            </div> -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <!-- Row -->
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card card-white">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th scope="col">Id</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Contacts</th>
+                                                <th scope="col">Total Orders</th>
+                                                <th scope="col">Total Amount</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Joining Date</th>
+                                
+                                            </tr>
+                                        </thead>
+                  
+                                            <%for(i=0,k=0;i<users.length,k<order.length;i++,k++){ %> 
+                                        <tbody>
+                                            <tr>
+                
+                                                
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        
+                                                        <div class="me-4">
+                                                            <%=i+1%>
+                                                            <img src="/admin/img/avatars/users.jpg" style="width: 40px; height: 40px;" class="rounded-circle" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span><%=users[i].email%></span>
+                                                </td>
+                                                <td>
+                                                    <span> <%=users[i].mobile%> </span>
+                                                </td>
+                                                 
+                                                <td><%=order[k].order_count%></td>
+                                                <td>
+                                                    <span>$<%=order[k].grandtotal%></span>
+                                                </td>
+                                        
+                                                <%if(users[i].block){%>
+                                                    <td><span class="badge rounded-pill bg-soft-green"><a href="/admin/admin_custormer_unblock/<%=users._id%>">Active</a></span></td>
+                                                <%} else { %>
+                                                    <td><span class="badge rounded-pill bg-soft-pink"><a href="/admin/admin_custormer_block/<%=users._id%>">Blocked</a></span></td>
+                                                <%}%>  
+                                               
+                                          
+
+
+                                                <td><%=users[i].createdAt.toLocaleDateString("en-AU")%></td>
+                                            </tr>
+                                        </tbody>
+                                        <%}%>
+                                
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row -->
+                </div>
+
+                <div class="page-footer">
+                    <p>Copyright &copy; <span class="current-year"></span> Ekka All rights reserved.</p>
+                </div>
+            </div>
+
+
+<%- include('../admin-partials/footer'); -%>

@@ -1,0 +1,170 @@
+<%- include('../partials/header'); -%>
+
+<!-- Ec breadcrumb start -->
+<div class="sticky-header-next-sec ec-breadcrumb section-space-mb">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="row ec_breadcrumb_inner">
+          <div class="col-md-6 col-sm-12">
+            <h2 class="ec-breadcrumb-title">Wishlist</h2>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- ec-breadcrumb-list start -->
+            <ul class="ec-breadcrumb-list">
+              <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+              <li class="ec-breadcrumb-item active">Wishlist</li>
+            </ul>
+            <!-- ec-breadcrumb-list end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Ec breadcrumb end -->
+
+<!-- Ec cart page -->
+<section class="md pt-2">
+
+  <div class="row mt-0">
+    <div class="col-sm-2"></div>
+    <div class="col-md-8">
+      <div class="common-block">
+        <div class="inner-title">
+          <h4 class="mb-0">My Wishlist</h4>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table v-align-middle">
+            <thead>
+              <tr>
+                <th>Delete</th>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Stock Status</th>
+                <th>Add To Cart</th>
+              </tr>
+            </thead>
+            <%if(pooo){%>
+              <%if(pooo.products.length>=1){%>
+                <tbody>
+                  <%for(i=0;i<pooo.products.length;i++){%>
+                  
+                    <tr>
+                        <td>
+                          <a onclick="deleteItem('<%=pooo.products[i].productId._id%>')"><i class="fas fa-trash"></i></a>
+                        </td>
+                        <td>
+                        <a href="#"
+                            ><img style="width: 100px; height: 100px;" src="/images/uploads/<%=pooo.products[i].productId.image[0]%>" alt="..."/>
+                        </a>
+                        </td>
+                        <td><a href="#"></a><%=pooo.products[i].productId.name%></td>
+                        <td class="product-price">$<%=pooo.products[i].productId.price%></td>
+                    
+                        <%if(pooo.products[i].productId.quantity>1){%>
+                          <td class="product-quantity"> In Stock</td>
+                          <td><a id="addCart" onclick="addtoCart('<%=pooo.products[i].productId._id%>')" class="butn-style2 small">Add To Cart</a></td>
+                        <%}else{%>
+                          <td class="product-quantity text-danger" style="font-weight: bold;" >Out of Stock</td>
+                          <td><a class="butn-style2 small" style="background: rgb(203, 17, 17);">Add To Cart</a></td>
+                        <%}%>
+                        
+                      </tr>
+                  
+                  <%}%>
+                </tbody>
+
+              <%}else{%>
+                <tbody>
+                  <tr>
+                      <h3><a class="text-danger" href="/">Add Product to Wishlist</a></h3>
+                  </tr>
+              </tbody>
+              <%}%>    
+          
+
+            <%}else{%>
+                <tbody>
+                    <tr>
+                        <h3><a class="text-danger" href="/">Add Product to Wishlist</a></h3>
+                    </tr>
+                </tbody>
+            <%}%>
+
+          </table>
+        </div>
+        <!-- <%if(pooo){%>
+            <a class="butn-style2 mt-3" onclick="clear()"><span>Clear Wishlist</span></a>
+        <%}else{%>
+            <a class="butn-style2 mt-3" href="/"><span></span>add to wishlist</a>
+        <%}%> -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+
+    async function addtoCart (id){
+      let result = axios.post('/cart/'+id,{
+      }).then((response)=>{
+        if(response.status){
+            Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'added to cart',
+            showConfirmButton: false,
+            timer: 1500
+            })
+            window.location.reload()
+        }
+        })  
+  }
+
+  async function deleteItem(id){
+      let result = axios.delete('/wishlist/'+id,{
+      }).then((response)=>{
+        if(!response.result){
+          Swal.fire('item removed')
+          .then(window.location.reload())
+        }
+        else{
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Item not deleted!',
+          })
+        }
+        })  
+  }
+//clar the wishlist and the data in it
+  async function clear(){
+      let result = axios.delete('/clearWishlist',{
+      }).then((last)=>{
+        if(last.result){
+          Swal.fire('whislist cleared')
+          .then(window.location.reload())
+        }
+        else{
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Somthing went wrong!',
+          })
+        }
+        })  
+        console.log("functo called thr firsat ftine")
+    }
+</script>
+
+
+
+
+
+<%- include('../partials/footer'); -%>
