@@ -38,7 +38,14 @@
 
     <!-- Main Style -->
     <link rel="stylesheet" href="/assets/css/demo5.css" />
-    
+    <style>
+        .ec-main-slider .slide-1 {
+           
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div id="ec-overlay"><span class="loader_img"></span></div>
@@ -743,24 +750,27 @@
     <!-- Main Slider Start -->
     <div class="ec-main-slider section ">
         <div class="ec-slider">
-            <div class="ec-slide-item d-flex slide-1">
-                <div class="container align-self-center">
-                    <div class="row">
-                        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
-                    
+           <%for(i=0;i<banner.length;i++){%>
+            <%if(banner[i].bannerId === 1){%>
+                <div class="ec-slide-item d-flex slide-1" style="background-image: url('/images/uploads/<%=banner[i].image[0]%>');">
+                    <div class="container align-self-center">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 align-self-center">
+                        
                                 <div class="ec-slide-content slider-animation">
-                                    <h2 class="ec-slide-stitle">new arrival</h2>
-                                    <h1 class="ec-slide-title">stylish headphone</h1>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                    <h2 class="ec-slide-stitle"><%=banner[i].titleName%></h2>
+                                    <h1 class="ec-slide-title"><%=banner[i].title%></h1>
+                                    <p><%=banner[i].discription%></p>
                                     <a href="#" class="btn btn-lg btn-secondary">Shop Now</a>
                              
                                 </div>
-                  
+                      
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+               <%}%> 
+           <%}%> 
             <!-- <div class="ec-slide-item d-flex slide-2">
                 <div class="container align-self-center">
                     <div class="row">
@@ -999,28 +1009,36 @@
                 <div class="ec-banners">
                     <div class="ec-banner-left col-sm-6">
                         <div class="ec-banner-block ec-banner-block-1 col-sm-12">
-                            <div class="banner-block">
-                                <img src="/assets/images/banner/23.png" alt="" />
-                                <div class="banner-content">
-                                    <span class="ec-banner-stitle">lenovo tablets</span>
-                                    <span class="ec-banner-title">UP to 70% OFF</span>
-                                    <span class="ec-banner-btn"><a href="#" class="btn-primary">Shop Now</a></span>
+                           <%for(i=0;i<banner.length;i++){%>
+                            <%if(banner[i].bannerId === 2){%>
+                                <div class="banner-block">
+                                    <img src="/images/uploads/<%=banner[i].image[0]%>" alt="" />
+                                    <div class="banner-content">
+                                        <span class="ec-banner-stitle"><%=banner[i].title%></span>
+                                        <span class="ec-banner-title"><%=banner[i].discription%></span>
+                                        <span class="ec-banner-btn"><a href="<%=banner[i].link%>" class="btn-primary">Shop Now</a></span>
+                                    </div>
                                 </div>
-                            </div>
+                            <%}%>    
+                           <%}%> 
                         </div>
                     </div>
-                    <div class="ec-banner-right col-sm-6">
-                        <div class="ec-banner-block ec-banner-block-2 col-sm-12">
-                            <div class="banner-block">
-                                <img src="/assets/images/banner/24.png" alt="" />
-                                <div class="banner-content">
-                                    <span class="ec-banner-stitle">Xiaoyi YI 1080p</span>
-                                    <span class="ec-banner-title">WiFi IP Camera 36</span>
-                                    <span class="ec-banner-btn"><a href="#" class="btn-primary">Shop Now</a></span>
+                    <%for(i=0;i<banner.length;i++){%>
+                        <%if(banner[i].bannerId === 3){%>
+                            <div class="ec-banner-right col-sm-6">
+                                <div class="ec-banner-block ec-banner-block-2 col-sm-12">
+                                    <div class="banner-block">
+                                        <img src="/images/uploads/<%=banner[i].image[0]%>" alt="" />
+                                        <div class="banner-content">
+                                            <span class="ec-banner-stitle"><%=banner[i].titleName%></span>
+                                            <span class="ec-banner-title"><%=banner[i].title%></span>
+                                            <span class="ec-banner-btn"><a href="<%=banner[i].link%>" class="btn-primary">Shop Now</a></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        <%}%>    
+                    <%}%>    
                 </div>
             </div>
         </div>
@@ -1348,17 +1366,20 @@
     <section class="section ec-offer-section section-space-mt section-space-mb">
         <h2 class="d-none">Offer</h2>
         <div class="container">
-            <div class="ec-offer-inner ofr-img">
-                <!-- <img src="/assets/images/offer-image/offer_bg.png" alt="" class="offer_bg" /> -->
-                <div class="col-sm-6 ec-offer-content">
-                    <div class="ec-offer-content-inner">
-                        <h2 class="ec-offer-stitle">black friday</h2>
-                        <h2 class="ec-offer-title">up to 60 % off</h2>
-                        <span class="ec-offer-desc">Select accessories for your favourites gadgets</span>
-                        <span class="ec-offer-btn"><a href="#" class="btn btn-primary">Shop Now</a></span>
+           <%for(i=0;i<banner.length;i++){%>
+            <%if(banner[i].bannerId === 4){%>
+                <div class="ec-offer-inner ofr-img" style="background-image: url('/images/uploads/<%=banner[i].image[0]%>');">
+                    <div class="col-sm-6 ec-offer-content">
+                        <div class="ec-offer-content-inner">
+                            <h2 class="ec-offer-stitle"><%=banner[i].titleName%></h2>
+                            <h2 class="ec-offer-title"><%=banner[i].title%></h2>
+                            <span class="ec-offer-desc"><%=banner[i].discription%></span>
+                            <span class="ec-offer-btn"><a href="<%=banner[i].link%>" class="btn btn-primary">Shop Now</a></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <%}%>    
+           <%}%>  
         </div>
     </section>
     <!-- offer Section End -->
@@ -1381,19 +1402,19 @@
                             <div class="ec-all-product-inner">
                                 <div class="ec-pro-image-outer">
                                     <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
+                                        <a href="/product/<%=data._id%>" class="image">
                                             <img class="main-image" src="/images/uploads/<%=data.image[0]%>"
                                                 alt="Product" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="ec-pro-content">
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html"><%=data.name%></a></h5>
+                                    <h5 class="ec-pro-title"><a href="/product/<%=data._id%>"><%=data.name%></a></h5>
                                     <h6 class="ec-pro-stitle"><%=data.Category%></h6>
                                     <div class="ec-pro-rat-price">
                                         <div class="ec-pro-rat-pri-inner">
                                             <span class="ec-price">
-                                                <span class="new-price">$<%=data.price%></span>
+                                                <span class="new-price">$<%=data.price%><a href="/product/<%=data._id%>">  shop now</a></span>
                                                 <!-- <span class="old-price">$658.00</span> -->
                                             </span>
                                         </div>
@@ -1419,19 +1440,19 @@
                             <div class="ec-all-product-inner">
                                 <div class="ec-pro-image-outer">
                                     <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
+                                        <a href="/product/<%=data._id%>" class="image">
                                             <img class="main-image" src="/images/uploads/<%=data.image[1]%>"
                                                 alt="Product" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="ec-pro-content">
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html"><%=data.name%></a></h5>
+                                    <h5 class="ec-pro-title"><a href="/product/<%=data._id%>"><%=data.name%></a></h5>
                                     <h6 class="ec-pro-stitle"><%data.Category%></h6>
                                     <div class="ec-pro-rat-price">
                                         <div class="ec-pro-rat-pri-inner">
                                             <span class="ec-price">
-                                                <span class="new-price">$<%=data.price%></span>
+                                                <span class="new-price">$<%=data.price%><a href="/product/<%=data._id%>">  shop now</a></span>
                                                 <!-- <span class="old-price">$3650.00</span> -->
                                             </span>
                                         </div>
@@ -1456,19 +1477,19 @@
                             <div class="ec-all-product-inner">
                                 <div class="ec-pro-image-outer">
                                     <div class="ec-pro-image">
-                                        <a href="product-left-sidebar.html" class="image">
+                                        <a href="/product/<%=data._id%>" class="image">
                                             <img class="main-image" src="/images/uploads/<%=data.image[2]%>"
                                                 alt="Product" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="ec-pro-content">
-                                    <h5 class="ec-pro-title"><a href="product-left-sidebar.html"><%=data.name%></a></h5>
+                                    <h5 class="ec-pro-title"><a href="/product/<%=data._id%>"><%=data.name%></a></h5>
                                     <h6 class="ec-pro-stitle"><%=data.Category%></h6>
                                     <div class="ec-pro-rat-price">
                                         <div class="ec-pro-rat-pri-inner">
                                             <span class="ec-price">
-                                                <span class="new-price">$<%=data.price%></span>
+                                                <span class="new-price">$<%=data.price%> <a href="/product/<%=data._id%>">  shop now</a></span>
                                                 <!-- <span class="old-price">$200.00</span> -->
                                             </span>
                                         </div>
@@ -1484,15 +1505,18 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-6 ec-right-banner-content dis-n-767">
                     <div class="ec-right-banner-inner">
-                        <div class="right-banner-block">
-                            <img class="right-banner-img" src="/assets/images/banner/22.png" alt="Banner" />
-                            <div class="right-banner-content">
-                                <span class="ec-right-banner-title">mi 8 lite</span>
-                                <span class="ec-right-banner-stitle">selfies and style</span>
-                                <span class="ec-right-banner-btn"><a href="#" class="btn-primary">Add to cart</a></span>
-                            </div>
-                        </div>
-
+                        <%for(i=0;i<banner.length;i++){%>
+                            <%if(banner[i].bannerId === 5){%>
+                                <div class="right-banner-block">
+                                    <img class="right-banner-img" src="/images/uploads/<%=banner[i].image[0]%>" alt="Banner" />
+                                    <div class="right-banner-content">
+                                        <span class="ec-right-banner-title"><%=banner[i].titleName%></span>
+                                        <span class="ec-right-banner-stitle"><%=banner[i].discription%></span>
+                                        <span class="ec-right-banner-btn"><a href="<%=banner[i].link%>" class="btn-primary">SHOP NOW</a></span>
+                                    </div>
+                                </div>
+                            <%}%>    
+                        <%}%>    
                     </div>
                 </div>
             </div>

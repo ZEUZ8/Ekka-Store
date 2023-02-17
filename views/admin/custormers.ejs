@@ -87,9 +87,9 @@
                                                 </td>
                                         
                                                 <%if(users[i].block){%>
-                                                    <td><span class="badge rounded-pill bg-soft-green"><a href="/admin/admin_custormer_unblock/<%=users._id%>">Active</a></span></td>
+                                                    <td><span class="badge rounded-pill bg-soft-green"><a href="/admin/admin_custormer_unblock/<%=users[i]._id%>">Active</a></span></td>
                                                 <%} else { %>
-                                                    <td><span class="badge rounded-pill bg-soft-pink"><a href="/admin/admin_custormer_block/<%=users._id%>">Blocked</a></span></td>
+                                                    <td><span class="badge rounded-pill bg-soft-pink"><a href="/admin/admin_custormer_block/<%=users[i]._id%>">Blocked</a></span></td>
                                                 <%}%>  
                                                
                                           

@@ -310,7 +310,19 @@ const clear_wishlist = async(req,res)=>{
     res.json({last:true})
 }
 
-
+const update_address = async(req,res)=>{
+  console.log("addres edti ")
+  const {address1,address2,city,country,pincode,mobile,id} = req.body.data
+  console.log(address1,address2,city,country,pincode,mobile,id)
+  try{
+    const update = await userAddres.updateOne({_id:id},{addres1:address1,addres2:address2,city:city,country:country,pincode:pincode,mobile:mobile})
+    console.log("try function called ")
+    res.json({result:true})
+  }catch(err){
+    console.log(err)
+    res.json({result:false})
+  }
+}
 
 
 const user_coupon = async(req,res)=>{
@@ -407,6 +419,29 @@ const cancel_order = async(req,res)=>{
   }
 }
 
+
+
+const search =async(req,res)=>{
+  const value = req.params.id
+  try{
+    console.log(value)
+    const regex = new RegExp(`^${value}`,"i")
+    const result = await Product.find({$or:[{name:{$regex:regex}},{vendor:{$regex:regex}},{category:{$regex:regex}}]})
+    if(result.length>0){
+      console.log("function goes ot if case")
+      res.json({result})
+    }else{
+      console.log("error")
+      res.json({dataError:true})
+    }
+  }catch(err){
+    console.log(err)
+  }
+}
+
+
+
+
 const test = (req,res)=>{
   res.render('user/checkout-complete')
 }
@@ -439,4 +474,6 @@ module.exports = {
   single_order_details,
   cancel_order,
   test,
+  search,
+  update_address
 };

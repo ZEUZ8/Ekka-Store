@@ -7,6 +7,11 @@ const categorySchema = new mongoose.Schema({
         required:[true,'Enter a category name'],
  
     },
+    brands:{
+        type:Array,
+        required:[true,'please enter the brand name'],
+    },
+    
     Discription:{
         type:String,
         required:[true,'discription must not be blank'],

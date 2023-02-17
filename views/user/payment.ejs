@@ -165,7 +165,7 @@
                         <div class="row">
                             <div class="ec-vendor-block-img ">
                                 <div class="ec-vendor-upload-detail">
-                                    <form id="address" class="row g-3">
+                                    <form id="name"  class="row g-3">
                                        
                                         <div class="col-md-12 space-t-15">
                                             <label class="form-label">Address 1</label>
@@ -193,8 +193,11 @@
                                             <label class="form-label">Phone number</label>
                                             <input type="text" name="mobile" required class="form-control" value="<%=useraddress.addreses[i].mobile%>">
                                         </div>
+                                        <div>
+                                            <input type="text" name="id" style="display: none;" required class="form-control" value="<%=useraddress.addreses[i]._id%>">
+                                        </div>
                                         <div class="col-md-12 space-t-15 pt-3">
-                                            <a href="/update"><button type="submit" class="btn btn-primary">Update</button></a>
+                                            <a ><button type="submit" class="btn btn-primary">Update</button></a>
                                             <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
                                                 aria-label="Close">Close</a>
                                         </div>
@@ -261,4 +264,24 @@
 </div>
 <%- include('../partials/footer'); -%>
 
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+       document.getElementById("name").addEventListener('submit',(e)=>{
+        e.preventDefault();
+        console.log("riyas")
+        let formData = new FormData(e.target)
+        let data = Object.fromEntries(formData)
+        axios.put('/update',{
+        data,
+        }).then((response)=>{
+            if(response.data.result){
+                Swal.fire('Address Edited')
+                // window.location.reload()
+            }
+            
+        })  
+       
+    })
+</script>
 

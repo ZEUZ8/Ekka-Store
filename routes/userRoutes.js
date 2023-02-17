@@ -21,7 +21,9 @@ const {
     single_order_details,
     user_block_page,
     cancel_order,
-    test
+    test,
+    search,
+    update_address
 } = require('../controllers/userController');
 
 
@@ -56,6 +58,7 @@ router.delete('/wishlist/:id',checking,delete_wishlist)
 
 router.delete('/clearWishlist',checking,clear_wishlist)
 
+router.put('/update',checking,update_address)
 
 router.post('/coupon',checking,user_coupon)
 
@@ -67,12 +70,17 @@ router.put('/order/:id',checking,cancel_order)
 
 router.get('/test',checking,test)
 
+router.get('/search/:id',checking,search)
 
-const Controller = require('../controllers/orderController')
+
+const Controller = require('../controllers/orderController');//controller functions importing
+const { route } = require("./addCategory");
 
 router.post('/create-order',checking,Controller.createorder)
 
 router.get('/paypalOrder',checking,Controller.paypalOrder)
+
+
 
 
 module.exports =  router;

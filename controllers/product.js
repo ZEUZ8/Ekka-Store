@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const Product = require("../models/product");
 const Acategory = require("../models/category");
 const Banner = require('../models/banner')
+const Category = require('../models/category')
 
 //handle errors for the backend
 const productError = (err) => {
@@ -29,6 +30,20 @@ let add_product_get = async (req, res) => {
   const data = await Acategory.find({});
   res.render("admin/add-product", { data });
 };
+
+
+const brandSelect = async(req,res)=>{
+  const {id} = req.query
+  console.log(id)
+  try{
+    const Brand = await Category.findOne({Category:id})
+    console.log(Brand)
+    res.json({Brand})
+  }catch(err){
+    console.log(err)
+  }
+}
+
 
 let add_product_post = async (req, res) => {
   const { name, color, quantity, variant, price, vendor, category } = req.body;
@@ -117,7 +132,12 @@ let admin_prduct_undelete = async (req, res) => {
 let single_product_showing = async (req, res) => {
   let id = req.params.id;
   const data = await Product.findOne({ _id: id });
-  const product = await Product.find({ delete: { $ne: false } });
+
+  const vendor = new RegExp(`^${data.vendor}`,"i")
+  const category = new RegExp(`^${data.category}`,"i")
+  console.log(category,vendor)
+  const product = await Product.find({$and:[{ delete: { $ne: false } },{$or:[{category:category}]}]});
+  console.log(product)
   if (data) {
     res.render("user/singleProduct", { data, product });
   } else {
@@ -128,13 +148,33 @@ let single_product_showing = async (req, res) => {
 
 
 const products_page = async(req,res)=>{
-  const category = await Acategory.find({});
-  const data = await Product.find({ delete: { $ne: false } }).limit(8);
+  const category = await Acategory.find({})
+  console.log(category)
+  const data = await Product.find({ delete: { $ne: false } });
   const banner = await Banner.find({})
   console.log("this tis the id ")
   res.render('user/products',{data,category})
 }
 
+const category_filter = async(req,res)=>{
+  console.log("consoleing for hte function")
+  const {category,brand} = req.query
+  console.log(category,brand)
+  try{
+    const Rbrand = new RegExp(`^${brand}`,"i")
+    const Rcategory = new RegExp(`^${category}`,"i")
+    const data = await Product.find({vendor:{$regex:Rbrand},category:{$regex:Rcategory}})
+    if(data.length>0){
+      res.json({data})
+      console.log("if case entred")
+    }else{
+      console.log("else case enterduuuuuuuuuu")
+      res.json({dataError:true})
+    }
+  }catch(err){
+    console.log(err)
+  }
+}
 
 module.exports = {
   add_product_get,
@@ -146,4 +186,6 @@ module.exports = {
   single_product_showing,
   admin_update_prodect,
   products_page,
+  brandSelect,
+  category_filter,
 };

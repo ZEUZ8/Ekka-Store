@@ -8,7 +8,7 @@ const moment = require('moment');
 //handle errors for the backend
 const handleCategoryError = (err) => {
   console.log(err.message, err.code);
-  const errors = { Discription: " ", Category: " " };
+  const errors = { Discription: " ", Category: " " ,brands:" "};
 
   if (err.code === 11000) {
     errors.Category = "it's already declared try another name";
@@ -23,10 +23,10 @@ const handleCategoryError = (err) => {
 };
 
 const add_catogories_post = async (req, res) => {
-  const { Category, Discription } = req.body;
-  console.log(Category, Discription);
+  const { Category, Discription,brands } = req.body;
+  console.log(Category, Discription,brands);
   try {
-    const category = await Acategory.create({ Discription, Category });
+    const category = await Acategory.create({ Discription, Category,brands });
     res.status(200).json(category);
   } catch (err) {
     const errors = handleCategoryError(err);

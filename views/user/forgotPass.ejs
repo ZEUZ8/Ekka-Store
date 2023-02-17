@@ -216,7 +216,7 @@ a {
               <div class="pt-5">
                 <div class="card2 card border-0 px-4 py-5">
               
-                  <form id="change">
+                  <form id="change" action="/change" method="post">
                     <div class="row px-3">
                         <label class="mb-1"><h6 class="mb-0 text-sm">Mobile</h6></label>
                         <input class="mb-4" type="text" name="mobile" placeholder="Enter a valid email address">
@@ -238,10 +238,10 @@ a {
              
                  
                   <div class="row mb-3 pt-3 px-3">
-                      <a href="/"><button type="submit" class="btn btn-blue text-center">Home </button></a>
                       <button type="submit" class="btn btn-blue text-center">Change </button>
                   </div>
                 </form>
+                
                   <!-- <div class="row mb-4 px-3">
                       <small class="font-weight-bold">are you sure? <a href="/forgotPassword" class="text-danger ">Change Password</a></small>
                   </div> -->
@@ -265,36 +265,7 @@ a {
 
 
 <script>
-
-    document.getElementById('change').addEventListener('submit',(e)=>{
-        e.preventDefault()
-        console.log("why is the rain")
-
-        let formData = new FormData(e.target)
-        let data = Object.fromEntries(formData)
-
-        if(!data.password == data.newpassword ){
-            console.log("confirem password error")
-        }else{
-            axios.post('/change',{
-        data,
-        }).then((response)=>{
-        if(response.status){
-            Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'added to cart',
-            showConfirmButton: false,
-            timer: 1500
-            })
-            e.target.reset()
-            // window.location.reload()
-        }
-        })  
-        console.log(data)
-        }
-       
-    })
+    
 
   
     

@@ -14,12 +14,16 @@ const {
     single_product_showing,
     admin_prduct_undelete,
     products_page,
+    brandSelect,
+    category_filter
 } = require('../controllers/product')
 
 //==============================for adding products========================
 router.get('/add_product',adminChek,add_product_get)
 
 router.post('/add_product',adminChek,upload.array('image',3),add_product_post)
+
+router.post('/brand',adminChek,brandSelect)
 
 router.get('/admin/products',adminChek,admin_products)
 
@@ -38,6 +42,7 @@ const {
     user_cart_get,
     add_to_cart,
     delete_cart_item,quantitychange,
+    
 } = require('../controllers/cartController');
 
 
@@ -52,6 +57,8 @@ router.get('/delete-item/:id',checking,delete_cart_item)
 router.patch("/cart",checking,quantitychange)
 
 router.get('/shop',checking,products_page)
+
+router.post('/products',checking,category_filter)
 
 
 module.exports= router;

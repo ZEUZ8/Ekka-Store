@@ -45,7 +45,7 @@
                                     <li><a href="/cart">Cart</a></li>
                                     <li><a href="/checkout">Checkout</a></li>
                                     <!-- <li><a href="track-order.html">Track Order</a></li> -->
-                                    <li><a href="user-invoice.html">Invoice</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -60,12 +60,10 @@
                                 <div class="ec-vendor-block-profile">
                                     <div class="ec-vendor-block-img space-bottom-30">
                                         <div class="ec-vendor-block-bg">
-                                            < href="#" class="btn btn-lg btn-primary"
-                                                data-link-action="editmodal" title="Edit Detail"
-                                                data-bs-toggle="modal" data-bs-target="#edit_modal">Edit Detail</a>
+                                          
                                         </div>
                                         <div class="ec-vendor-block-detail">
-                                            <img class="v-img" src="assets/images/user/1.jpg" alt="vendor image">
+                                            <img class="v-img" src="/admin/img/avatars/users.jpg" alt="vendor image">
                                             <h5 class="name"><%=user.name%></h5>
                                             <!-- <p>( Business Man )</p> -->
                                         </div>
@@ -108,18 +106,33 @@
                                         </div> -->
                                         <div class="col-md-6 col-sm-12">
                                             <div class="ec-vendor-detail-block ec-vendor-block-address">
-                                                <h6>Add Shipping Address<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_2"><img src="assets/images/icons/edit.svg"
-                                                    class="svg_img pro_svg" alt="edit" /></a>
-                                                </h6>
                                                 <%if(useraddres){%>
+                                                  <%if(useraddres.addreses.length>0){%>
+                                                    <h6>Add Shipping Address<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_2"><img src="assets/images/icons/edit.svg"
+                                                        class="svg_img pro_svg" alt="edit" /></a>
+                                                    </h6>
                                                     <%for(i=0;i<useraddres.addreses.length;i++){%>
                                                         <ul>
                                                             <li>
-                                                                <strong>address : </strong><%=useraddres.addreses[i].addres1%>
+                                                                <strong>address <%=i+1%> : </strong><%=useraddres.addreses[i].addres1%>  <a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_3<%=i%>"><img src="assets/images/icons/edit.svg"
+                                                                    class="svg_img pro_svg" alt="edit" /></a>
                                                             </li>
                                                         </ul>
-                                                        <%}%>
+                                                    <%}%>
+                                                  <%}else{%>
+                                                    <h6>Add Shipping Address<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_2"><img src="assets/images/icons/edit.svg"
+                                                        class="svg_img pro_svg" alt="edit" /></a>
+                                                    </h6>
+                                                    <ul>
+                                                        <li>
+                                                            <strong>address : </strong>add address
+                                                        </li>
+                                                    </ul>
+                                                  <%}%>    
                                                 <%}else{%>
+                                                    <h6>Add Shipping Address<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal_2"><img src="assets/images/icons/edit.svg"
+                                                        class="svg_img pro_svg" alt="edit" /></a>
+                                                    </h6>
                                                     <ul>
                                                         <li>
                                                             <strong>address : </strong>add address
@@ -139,44 +152,16 @@
     </div>
 </section>
 
+
+
+ <!-- if the user don't have an address then he can create a addres by this modal -->
 <div class="modal fade" id="edit_modal_2" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
                     <div class="ec-vendor-block-img space-bottom-30">
-                        <!-- <div class="ec-vendor-block-bg cover-upload">
-                            <div class="thumb-upload">
-                                <div class="thumb-edit">
-                                    <input type='file' id="thumbUpload01" class="ec-image-upload"
-                                        accept=".png, .jpg, .jpeg" />
-                                    <label><img src="assets/images/icons/edit.svg"
-                                            class="svg_img header_svg" alt="edit" /></label>
-                                </div>
-                                <div class="thumb-preview ec-preview">
-                                    <div class="image-thumb-preview">
-                                        <img class="image-thumb-preview ec-image-preview v-img"
-                                            src="assets/images/banner/8.jpg" alt="edit" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="ec-vendor-block-detail">
-                            <div class="thumb-upload">
-                                <div class="thumb-edit">
-                                    <input type='file' id="thumbUpload02" class="ec-image-upload"
-                                        accept=".png, .jpg, .jpeg" />
-                                    <label><img src="assets/images/icons/edit.svg"
-                                            class="svg_img header_svg" alt="edit" /></label>
-                                </div>
-                                <div class="thumb-preview ec-preview">
-                                    <div class="image-thumb-preview">
-                                        <img class="image-thumb-preview ec-image-preview v-img"
-                                            src="assets/images/user/1.jpg" alt="edit" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                      
                         <div class="ec-vendor-upload-detail">
                             <form method="post" action="/address/<%=user._id%>" id="address" class="row g-3">
                                
@@ -220,8 +205,62 @@
     </div>
 </div>
 
+<!-- modal for the user if he alreadt have and wnat to edit then this modal will work -->
+<%for(i=0;i<useraddres.addreses.length;i++){%>
+    <div class="modal fade" id="edit_modal_3<%=i%>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="ec-vendor-block-img space-bottom-30">
+                          
+                            <div class="ec-vendor-upload-detail">
+                                <form method="post" action="/address/<%=user._id%>" id="name" class="row g-3">
+                                   
+                                    <div class="col-md-12 space-t-15">
+                                        <label class="form-label">Address 1</label>
+                                        <input type="text" name="address1" value="<%=useraddres.addreses[i].addres1%> " required class="form-control">
+                                        <div class="address1 error"></div>
+                                    </div>
+                                    <div class="col-md-12 space-t-15">
+                                        <label class="form-label">Address 2</label>
+                                        <input type="text" name="address2" value="<%=useraddres.addreses[i].addres2%>" required class="form-control">
+                                    </div>
+                                 
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">City</label>
+                                        <input type="text" name="city" required value="<%=useraddres.addreses[i].city%>" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">Country</label>
+                                        <input type="text" name="country" required value="<%=useraddres.addreses[i].country%>" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">Pincode</label>
+                                        <input type="text" name="pincode" required value="<%=useraddres.addreses[i].pincode%>" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">Phone number</label>
+                                        <input type="text" name="mobile" value="<%=useraddres.addreses[i].mobile%>" required class="form-control">
+                                    </div>
+                                    <div class="col-md-12 space-t-15 pt-3">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
+                                            aria-label="Close">Close</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<%}%>    
+<!-- endign the editing section  -->
 
 
+<!-- for the email addres and the deatils -->
 <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -230,12 +269,7 @@
                     <div class="ec-vendor-block-img space-bottom-30">
                         <div class="ec-vendor-block-bg cover-upload">
                             <div class="thumb-upload">
-                                <!-- <div class="thumb-edit">
-                                    <input type='file' id="thumbUpload01" class="ec-image-upload"
-                                        accept=".png, .jpg, .jpeg" />
-                                    <label><img src="assets/images/icons/edit.svg"
-                                            class="svg_img header_svg" alt="edit" /></label>
-                                </div> -->
+                                
                                 <div class="thumb-preview ec-preview">
                                     <div class="image-thumb-preview">
                                         <img class="image-thumb-preview ec-image-preview v-img"
@@ -249,17 +283,17 @@
                             <div class="ec-vendor-block-detail">
                                 <div class="thumb-upload">
                          
-                                    <div class="thumb-edit">
+                                    <!-- <div class="thumb-edit">
                                         <input type='file' id="thumbUpload02" class="ec-image-upload"
                                             accept=".png, .jpg, .jpeg" />
                                         <label><img src="assets/images/icons/edit.svg"
                                                 class="svg_img header_svg" alt="edit" /></label>
-                                    </div>
+                                    </div> -->
                       
                                     <div class="thumb-preview ec-preview">
                                         <div class="image-thumb-preview">
                                             <img class="image-thumb-preview ec-image-preview v-img"
-                                                src="assets/images/user/1.jpg" alt="edit" />
+                                                src="/admin/img/avatars/users.jpg" alt="edit" />
                                         </div>
                                     </div>
                                 </div>
@@ -299,8 +333,8 @@
         </div>
     </div>
 </div> 
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- 
 <script>
     const addres1Error = document.querySelector('.address1.error')
     document.getElementById("address").addEventListener('submit',(e)=>{
@@ -366,5 +400,26 @@
 
 
 </script> -->
+
+
+
+<script>
+       document.getElementById("name").addEventListener('submit',(e)=>{
+        e.preventDefault();
+        console.log("riyas")
+        let formData = new FormData(e.target)
+        let data = Object.fromEntries(formData)
+        axios.put('/update',{
+        data,
+        }).then((response)=>{
+            if(response.status){
+                Swal.fire('Address Edited')
+                // window.location.reload()
+            }
+            
+        })  
+       
+    })
+</script>
 
 <%- include('../partials/footer'); -%>

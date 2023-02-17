@@ -1,6 +1,6 @@
-const AccountSID = "AC80815df9fb1dcbd548a3db59b8f58c7d";
-const ServiceSID = "VA4fd96d19d8a0ded60b863c490ece9914";
-const AuthToken = "69d8c9e9ef5a3410be6c9a9cdab0d67f";
+const AccountSID = process.env.AccountSID;
+const ServiceSID = process.env.ServiceSID;
+const AuthToken = process.env.AuthToken;
 const twilio = require('twilio')(AccountSID,AuthToken)
 
 const User = require('../models/User')
@@ -14,20 +14,21 @@ let password
 const verify_post = async (req, res) => {
     const Token =  req.cookies.jwt;
     const mobile = req.body.mobile
-
-    console.log(userData.mobile)
     if(Token){
         res.redirect('/login')
     }else{
+        console.log("in the first else cse and wirting")
             if(await User.findOne({mobile:mobile})){
                 res.render('user/verify')
             }
             else{
+                console.log("function entered the eflse case")
                 // console.log(mobile)
                 twilio.verify.v2
                 .services(ServiceSID)
                 .verifications.create({ to:`+91${mobile}`, channel: "sms" })
                 .then((verification) => {
+                    console.log("falso the otp sended to the number")
                     res.render("user/otpVerify",{mobile});
                     
                 } )
@@ -42,7 +43,7 @@ const verify_post = async (req, res) => {
 const otpVerifyPost = async (req, res) => {
     console.log("user up here sldfjl;ksajdlfjlasjdfljal;dsgl;jlgh;lsdlfjlkadjlfjaldjfl;kasdlkfkjdlkfjgldjsflk")
     const enterOtp = req.body.userOtp
-    const mobile = req.params.mobile
+    const {mobile,password} = req.params.mobile
     console.log(mobile);
         twilio.verify.v2
             .services(ServiceSID)
@@ -60,7 +61,66 @@ const otpVerifyPost = async (req, res) => {
 };
 
 
+const otp_sendForPassword = async (req, res) => {
+    const Token =  req.cookies.jwt;
+    const mobile = req.body.mobile
+    if(Token){
+        res.redirect('/login')
+    }else{
+        console.log("in the first else cse and wirting")
+            if(await User.findOne({mobile:mobile})){
+                console.log("function entered the eflse case")
+                // console.log(mobile)
+                twilio.verify.v2
+                .services(ServiceSID)
+                .verifications.create({ to:`+91${mobile}`, channel: "sms" })
+                .then((verification) => {
+                    console.log("falso the otp sended to the number")
+                    res.render("user/otpVerify",{mobile});
+                    
+                } )
+                .catch(err=>{
+                    console.log(err)
+                    redirect('user/signup')
+                })
+               
+            }
+            else{
+                res.json({numberError:true})
+            }
+    }
+};
 
+
+
+const otp_verifyForPassword = async (req, res) => {
+    const Token =  req.cookies.jwt;
+    const mobile = req.body.mobile
+    if(Token){
+        res.redirect('/login')
+    }else{
+        console.log("in the first else cse and wirting")
+            if(await User.findOne({mobile:mobile})){
+                res.render('user/verify')
+            }
+            else{
+                console.log("function entered the eflse case")
+                // console.log(mobile)
+                twilio.verify.v2
+                .services(ServiceSID)
+                .verifications.create({ to:`+91${mobile}`, channel: "sms" })
+                .then((verification) => {
+                    console.log("falso the otp sended to the number")
+                    res.render("user/otpVerify",{mobile});
+                    
+                } )
+                .catch(err=>{
+                    console.log(err)
+                    redirect('user/signup')
+                })
+            }
+    }
+};
 
 
 // .then(async (varification_check) => {
@@ -91,4 +151,6 @@ module.exports ={
     verify_get,
     verify_post,
     otpVerifyPost,
+    otp_sendForPassword,
+    otp_verifyForPassword
 }

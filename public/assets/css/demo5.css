@@ -19199,12 +19199,12 @@ select::-ms-expand {
 .ec-main-slider .slide-1, .ec-main-slider .slide-2, .ec-main-slider .slide-3 {
   height: 70vh;
 }
-.ec-main-slider .slide-1 {
+/* .ec-main-slider .slide-1 {
   background-image: url(../images/main-slider-banner/13.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 .ec-main-slider .slide-2 {
   background-image: url(../images/main-slider-banner/14.jpg);
   background-position: center;

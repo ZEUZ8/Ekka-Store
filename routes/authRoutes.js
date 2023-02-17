@@ -26,8 +26,8 @@ router.get('/verify',Controller.verify_get)
 router.post('/verify',Controller.verify_post)
 router.post('/otpVerify/:mobile',Controller.otpVerifyPost)
 
-// router.post('/change',Controller.)
-// router.post('/otp',Controller.)
+// router.post('/change',Controller.otp_sendForPassword)
+// router.post('/otp',Controller.otp_verifyForPassword)
 
 
 

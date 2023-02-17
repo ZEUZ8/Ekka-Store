@@ -49,27 +49,27 @@
                                                     Looks good!
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="validationCustom05">Vendor</label>
-                                                <input type="text" class="form-control quantity" name="vendor" id="validationCustom05" placeholder="Adidas" required>
-                                                <div class="valid-feedback">
-                                                    Looks good!
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-4">
+                                            <div class="col-md-6 mb-4">
                                                 <label for="validationCustom09">Category</label>
                                                
-                                                    <select class="form-select form-control" id="validationCustom09" name="category" aria-label="Default select example">
+                                                    <select onchange="brand()" id="brandName" class="form-select form-control" id="validationCustom09" name="category" aria-label="Default select example" style="background: white;">
                                                         <option value="">choose a Category</option>
                                                         <% if(data.length>0){ %>
                                                         <% data.forEach( (data) => { %> 
-                                                            <option value="<%=data.Category%>"><%=data.Category%></option>  
+                                                            <option  value="<%=data.Category%>"><%=data.Category%></option>  
                                                         <%})%>
                                                     <%}%> 
                                                     </select>          
                                                 <div class="category error"></div>
                                         
                                             </div> 
+                                            <div class="col-md-12 mb-3">
+                                                <label for="validationCustom05">Brand</label>
+                                               <select name="vendor"  class="form-select form-control" id="brands" aria-label="Default select example">
+                                                <option >choose a brand</option>
+                                               </select>
+                                            </div>
+                                       
                                             <!-- <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="col-form-label">Wysiwyg</label>
@@ -424,6 +424,7 @@
         </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const form = document.querySelector('form')
             const nameError = document.querySelector(".name.error")
@@ -436,54 +437,23 @@
                     nameError.textContent = err.errors.name
                 }
             })
+            function brand(){
+                const id = document.getElementById('brandName').value
+                console.log(id)
+                axios.post(`/brand?id=${id}`)
+                .then((response)=>{
+                    console.log(response.data.Brand,11111)
+                    let brand = response.data.Brand
+                    if(response.data.Brand){
+                        let html = ''
+                        for(z=0;z<brand.brands.length;z++){
+                            html += `<option>${brand.brands[z]}</option>`
+                        }
+                        document.getElementById('brands').innerHTML = html
+                    }
+                })
+            }
     </script>
 
-    <!-- BUY TEMPLATE
-    ================================================== -->
-    <!-- <div class="buy-theme alt-font d-none d-lg-inline-block"><a href="https://wrapbootstrap.com/theme/smartshop-multipurpose-ecommerce-template-WB0N7CT4D" target="_blank"><i class="fas fa-cart-plus"></i><span>Buy Template</span></a></div>
-
-    <div class="all-demo alt-font d-none d-lg-inline-block"><a href="https://www.chitrakootweb.com/contact.html" target="_blank"><i class="far fa-envelope"></i><span>Quick Question?</span></a></div> -->
-
-    <!-- SCROLL TO TOP
-     ================================================== -->
-    <a href="#" class="scroll-to-top"><i class="fas fa-angle-up" aria-hidden="true"></i></a>
-
-    <!-- ALL JS INCLUDE
-    ================================================== -->
-
-    <!-- jQuery -->
-    <script src="/admin/plugins/jquery/jquery.min.js"></script>
-
-    <!-- popper -->
-    <script src="/admin/plugins/popper/js/popper.min.js"></script>
-
-    <!-- bootstrap -->
-    <script src="/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- slimscroll -->
-    <script src="/admin/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-
-    <!-- uniform -->
-    <script src="/admin/plugins/uniform/js/jquery.uniform.standalone.js"></script>
-
-    <!-- switchery -->
-    <script src="/admin/plugins/switchery/switchery.min.js"></script>
-
-    <!-- switchery -->
-    <script src="/admin/plugins/quill/quill.js"></script>
-
-    <!-- tagsinput -->
-    <script src="/admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-
-    <!-- form elements -->
-    <script src="/admin/js/pages/form-elements.js"></script>
-
-    <!-- theme core scripts -->
-    <script src="/admin/js/main.js"></script>
-
-    <!-- all js include end -->
-</body>
-
-
-<!-- Mirrored from smartshop.websitelayout.net/admin/add-products.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Jan 2023 16:01:00 GMT -->
-</html>
+<%- include('../admin-partials/footer'); -%>
+  

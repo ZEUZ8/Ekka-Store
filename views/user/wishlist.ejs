@@ -30,79 +30,67 @@
   <div class="row mt-0">
     <div class="col-sm-2"></div>
     <div class="col-md-8">
-      <div class="common-block">
-        <div class="inner-title">
-          <h4 class="mb-0">My Wishlist</h4>
-        </div>
-
-        <div class="table-responsive">
-          <table class="table v-align-middle">
-            <thead>
-              <tr>
-                <th>Delete</th>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Stock Status</th>
-                <th>Add To Cart</th>
-              </tr>
-            </thead>
-            <%if(pooo){%>
-              <%if(pooo.products.length>=1){%>
-                <tbody>
-                  <%for(i=0;i<pooo.products.length;i++){%>
-                  
-                    <tr>
-                        <td>
-                          <a onclick="deleteItem('<%=pooo.products[i].productId._id%>')"><i class="fas fa-trash"></i></a>
-                        </td>
-                        <td>
-                        <a href="#"
-                            ><img style="width: 100px; height: 100px;" src="/images/uploads/<%=pooo.products[i].productId.image[0]%>" alt="..."/>
-                        </a>
-                        </td>
-                        <td><a href="#"></a><%=pooo.products[i].productId.name%></td>
-                        <td class="product-price">$<%=pooo.products[i].productId.price%></td>
-                    
-                        <%if(pooo.products[i].productId.quantity>1){%>
-                          <td class="product-quantity"> In Stock</td>
-                          <td><a id="addCart" onclick="addtoCart('<%=pooo.products[i].productId._id%>')" class="butn-style2 small">Add To Cart</a></td>
-                        <%}else{%>
-                          <td class="product-quantity text-danger" style="font-weight: bold;" >Out of Stock</td>
-                          <td><a class="butn-style2 small" style="background: rgb(203, 17, 17);">Add To Cart</a></td>
-                        <%}%>
-                        
-                      </tr>
-                  
-                  <%}%>
-                </tbody>
-
-              <%}else{%>
-                <tbody>
+      <%if(pooo){%>
+        <%if(pooo.products.length>=1){%>
+          <div class="common-block">
+            <div class="inner-title">
+              <h4 class="mb-0">My Wishlist</h4>
+            </div>
+    
+            <div class="table-responsive">
+              <table class="table v-align-middle">
+                <thead>
                   <tr>
-                      <h3><a class="text-danger" href="/">Add Product to Wishlist</a></h3>
+                    <th>Delete</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Stock Status</th>
+                    <th>Add To Cart</th>
                   </tr>
-              </tbody>
-              <%}%>    
-          
-
-            <%}else{%>
-                <tbody>
-                    <tr>
-                        <h3><a class="text-danger" href="/">Add Product to Wishlist</a></h3>
-                    </tr>
-                </tbody>
-            <%}%>
-
-          </table>
+                </thead>
+                    <tbody>
+                      <%for(i=0;i<pooo.products.length;i++){%>
+                      
+                        <tr>
+                            <td>
+                              <a onclick="deleteItem('<%=pooo.products[i].productId._id%>')"><i class="fas fa-trash"></i></a>
+                            </td>
+                            <td>
+                            <a href="#"
+                                ><img style="width: 100px; height: 100px;" src="/images/uploads/<%=pooo.products[i].productId.image[0]%>" alt="..."/>
+                            </a>
+                            </td>
+                            <td><a href="#"></a><%=pooo.products[i].productId.name%></td>
+                            <td class="product-price">$<%=pooo.products[i].productId.price%></td>
+                        
+                            <%if(pooo.products[i].productId.quantity>1){%>
+                              <td class="product-quantity"> In Stock</td>
+                              <td><a id="addCart" onclick="addtoCart('<%=pooo.products[i].productId._id%>')" class="butn-style2 small">Add To Cart</a></td>
+                            <%}else{%>
+                              <td class="product-quantity text-danger" style="font-weight: bold;" >Out of Stock</td>
+                              <td><a class="butn-style2 small" style="background: rgb(203, 17, 17);">Add To Cart</a></td>
+                            <%}%>
+                            
+                          </tr>
+                      
+                      <%}%>
+                    </tbody>
+                  </table>  
+            </div>
+          </div>
+     
+      <%}else{%>
+        <div  style="width: 40rem; height: 30rem; margin-left: 9rem;">
+              <a href="/"><img src="/assets/images/chatboat/whishlist.jpg" alt="network error"></a>
+              <a href=""></a>
         </div>
-        <!-- <%if(pooo){%>
-            <a class="butn-style2 mt-3" onclick="clear()"><span>Clear Wishlist</span></a>
-        <%}else{%>
-            <a class="butn-style2 mt-3" href="/"><span></span>add to wishlist</a>
-        <%}%> -->
-
-      </div>
+      <%}%>    
+    <%}else{%>
+      <div  style="width: 40rem; height: 30rem; margin-left: 9rem;">
+        <img src="/assets/images/chatboat/whishlist.jpg" alt="network error">
+       </div>
+    <%}%>
     </div>
   </div>
 </section>

@@ -18,7 +18,7 @@ const {
 //categories
 router.get('/admin/add_categoies',adminChek,add_catogories_get)
 
-router.post('/creat_category',adminChek,add_catogories_post)//the fecth method that i used in the ejs file
+router.post('/creat_category',adminChek,add_catogories_post)//the fecth method 
 
 router.get('/admin/category',adminChek,admin_category)
 
