@@ -29,6 +29,9 @@ const coupon = new mongoose.Schema({
     type:Number,
     default:0
   },
+  minrate:{
+    type:Number,
+  }
 },
 {
   timestamps:true

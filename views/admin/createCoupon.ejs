@@ -16,33 +16,33 @@
                     <div class="card-body">
                         <form id="coupon">
                             
-                            <div class="form-group">
-                                <label for="exampleInput1">Coupan Title</label>
-                                <input type="text" name="couponTitle" placeholder="NAME" required class="form-control" id="exampleInput1">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="exampleInput1">Coupan Title</label>
+                                    <input type="text" name="couponTitle" placeholder="NAME" required class="form-control" id="exampleInput1">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="exampleInput2">Coupan Code</label>
+                                    <input type="text" name="couponCode" placeholder="COUPON CODE" required class="form-control" id="exampleInput2">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInput2">Coupan Code</label>
-                                <input type="text" name="couponCode" placeholder="COUPON CODE" required class="form-control" id="exampleInput2">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label>Start Date</label>
+                                    <input type="date" name="startDate" required class="form-control date-picker">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>End Date</label>
+                                    <input type="date" name="endDate" required class="form-control date-picker">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="date" name="startDate" required class="form-control date-picker">
-                            </div>
-                            <div class="form-group">
-                                <label>End Date</label>
-                                <input type="date" name="endDate" required class="form-control date-picker">
-                            </div>
-                            <!-- <div class="custom-control custom-checkbox my-4">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Allow Free Shipping
-                                </label>
-                            </div> -->
-                            <div class="form-group">
+                        
+                           <div class="row">
+                            <div class="form-group col-6">
                                 <label for="exampleInput3">Quantity</label>
                                 <input type="number" name="couponQuantity" placeholder="quantity" required class="form-control" id="exampleInput3">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-6">
                                 <label for="validationCustom02">Discount Type</label>
                                 <select class="form-select form-control" id="validationCustom02" name="couponType" required aria-label="Default select example">
                                     <option  selected>Select Discount Type</option>
@@ -50,10 +50,18 @@
                                     <option value="fixed">Fixed</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                           </div>
+                           <div class="row">
+                            <div class="form-group col-6">
                                 <label for="exampleInput3">Discount</label>
                                 <input type="number" name="couponDiscount" placeholder="Discount" required class="form-control" id="exampleInput3">
                             </div>
+                            <div class="form-group col-6">
+                                <label for="exampleInput3">Min Price Rate</label>
+                                <input type="number" name="minrate" placeholder="Min Price Price" required class="form-control" id="exampleInput3">
+                            </div>
+                           </div>
+                            
                            <div class="custom-control custom-checkbox mt-4">
                                 <button type="submit" class="btn btn-outline-secondary">Create Coupon </button>
                                
@@ -71,67 +79,7 @@
                 </div>
             </div>
         </div>
-        <!-- end row -->
-
-        <!-- row -->
-        <!-- <div class="row">
-            <div class="col-md-6 grid-margin">
-                <div class="card card-white h-100">
-                    <div class="card-heading clearfix">
-                        <h4 class="card-title">Restriction</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInput4">Products</label>
-                                <input type="text" class="form-control" id="exampleInput4">
-                            </div>
-                            <div class="form-group">
-                                <label for="validationCustom03">Category</label>
-                                <select class="form-select form-control" id="validationCustom03" aria-label="Default select example">
-                                    <option selected>--Select--</option>
-                                    <option value="1">Electronics</option>
-                                    <option value="2">Clothes</option>
-                                    <option value="3">Shoes</option>
-                                    <option value="4">Digital</option>
-                                    <option value="5">Furniture</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInput5">Minimum Spend</label>
-                                <input type="number" class="form-control" id="exampleInput5">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInput6">Maximum Spend</label>
-                                <input type="number" class="form-control" id="exampleInput6">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 grid-margin">
-                <div class="card card-white h-100">
-                    <div class="card-heading clearfix">
-                        <h4 class="card-title">Usage Limits</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInput7">Per Limit</label>
-                                <input type="number" class="form-control" id="exampleInput7">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInput8">Per Customer</label>
-                                <input type="number" class="form-control" id="exampleInput8">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- end row -->
     </div>
-
     <div class="page-footer">
         <p>Copyright &copy; <span class="current-year"></span> Ekka All rights reserved.</p>
     </div>

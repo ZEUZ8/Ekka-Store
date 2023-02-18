@@ -98,6 +98,17 @@ const login_post = async (req, res) => {
 };
 
 const logout_get = async(req, res) => {
+  const Token = req.cookies.jwt
+  try{
+    jwt.verify(Token,process.env.userKey,async(err,decodedToken)=>{
+      const id = decodedToken.id
+      const update = await Cart.updateOne({user:id},{$unset:{couponDiscount:1,grandTotal:1}})
+      console.log("yes")
+    })
+  }
+  catch(err){
+    console.log(err)
+  }
   res.cookie("jwt", "", { expiresIn: 1 });
   res.redirect("/");
 };

@@ -63,12 +63,12 @@ const coupons = async(req,res)=>{
 }
 
 const create_coupon = async(req,res)=>{
-  const {couponCode,couponTitle,startDate,status,endDate,couponQuantity,couponType,couponDiscount} = req.body.data
+  const {couponCode,couponTitle,startDate,status,endDate,couponQuantity,couponType,couponDiscount,minrate} = req.body.data
   console.log(status)
   if(await Coupon.findOne({couponCode:couponCode})){
     res.json({status:false})
   }else{
-  const creart = await Coupon.create({couponCode:couponCode,startDate:startDate,endDate:endDate,discount:couponDiscount,couponTitle:couponTitle,qunatity:couponQuantity,discountType:couponType,couponStatus:status})
+  const creart = await Coupon.create({couponCode:couponCode,startDate:startDate,endDate:endDate,discount:couponDiscount,couponTitle:couponTitle,qunatity:couponQuantity,discountType:couponType,couponStatus:status,minrate:minrate})
   console.log("coupon created")
   }
 }

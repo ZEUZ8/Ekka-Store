@@ -61,6 +61,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Code</th>
                                         <th scope="col">Discount</th>
+                                        <th scope="col">Min Price</th>
                                         <th scope="col">Type</th>
                                         <th scope="col">quantity</th>
                                         <th scope="col">Creation Date</th>
@@ -81,6 +82,7 @@
                                         <td><%=coupons[i].couponTitle%></td>
                                         <td><%=coupons[i].couponCode%></td>
                                         <td><%=coupons[i].discount%></td>
+                                        <td><%=coupons[i].minrate%></td>
                                         <td><%=coupons[i].discountType%></td>
                                         <td>
                                             <div class="progress-text">
@@ -177,10 +179,10 @@
                                             <label class="form-label">Quantity</label>
                                             <input type="boolean" name="startDate" required  value="<%=coupons[i].qunatity%>" class="form-control">
                                         </div>
-                                        <!-- <div class="col-md-6 space-t-15">
-                                            <label class="form-label">Status</label>
-                                            <input type="" name="status" required  value="<%=coupons[i].couponStatus%>" class="form-control">
-                                        </div> -->
+                                         <div class="col-md-6 space-t-15">
+                                            <label class="form-label">Min Price Rate</label>
+                                            <input type="" name="status" required  value="<%=coupons[i].minrate%>" class="form-control">
+                                        </div> 
                                         
                                         <div class="col-md-12 space-t-15 pt-2">
                                             <h3>

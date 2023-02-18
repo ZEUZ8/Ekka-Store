@@ -311,11 +311,25 @@ const clear_wishlist = async(req,res)=>{
 }
 
 const update_address = async(req,res)=>{
-  console.log("addres edti ")
-  const {address1,address2,city,country,pincode,mobile,id} = req.body.data
+  console.log("tis tisthelerre")
+  const userId = req.query.userId
+  const {address1,address2,city,country,pincode,mobile,id} = req.body
   console.log(address1,address2,city,country,pincode,mobile,id)
   try{
-    const update = await userAddres.updateOne({_id:id},{addres1:address1,addres2:address2,city:city,country:country,pincode:pincode,mobile:mobile})
+    console.log("fuctoj called")
+    const update = await userAddres.updateOne(
+      {user_id:userId,'addreses._id':id},
+      {
+        $set:{
+          'addreses.$.addres1':address1,
+          'addreses.$.address2':address2,
+          'addreses.$.city':city,
+          'addreses.$.country':country,
+          'addreses.$.pincode':pincode,
+          'addreses.$.mobile':mobile
+        }
+      }
+      )
     console.log("try function called ")
     res.json({result:true})
   }catch(err){
@@ -328,47 +342,42 @@ const update_address = async(req,res)=>{
 const user_coupon = async(req,res)=>{
   console.log("coupen resuce fucjntin entered")
   const {coupan} = req.body.data
-  console.log(coupan)
   const {id} = res.locals.user
   const cart = await Cart.findOne({user:id})
-  console.log(cart)
   const coupons = await Coupon.findOne({couponCode:coupan})
-  console.log(coupons+"lsjdflkjalsdkjflkjaslkdjf;lkajsd;lkfja")
   if(coupons){
     if(await Order.findOne({userId:id,usedCoupon:coupan})){
+      
       res.json({unique:true})
      }else{
-
-      console.log("yes clkoup ind")
+      if(cart.total<coupons.minrate){
+        console.log("limit error")
+        const minrate = coupons.minrate
+        res.json({minrate})
+      }else{
+        console.log("yes clkoup ind")
         const start = Date.now()
         if( start =>coupons.startDate && start <= coupons.endDate){
-
           console.log(coupons.startDate , coupons.endDate)
-
           if(coupons.discountType == 'fixed'){
             console.log("fixed")
             const result = (cart.total - coupons.discount)
-        
             const couponUpdate = await Cart.updateOne({user:id},{usedCoupon:coupan,couponDiscount:coupons.couponDiscount,grandTotal:result})
-            
             res.json({coupan:true})
           }else{
             console.log("percent")
             const result = (cart.total - coupons.discount*cart.total/100)
-    
             const couponUpdate = await Cart.updateOne({user:id},{usedCoupon:coupan,couponDiscount:coupons.couponDiscount,grandTotal:result})
-
             res.json({coupan:true})
           }
         }
-        
         else{
           console.log("time illa");
           res.json({timeError:true})
         }
-
+      }
+    
      }
-     
   }else{
     console.log("coupon illa")
     res.json({couponError:true})

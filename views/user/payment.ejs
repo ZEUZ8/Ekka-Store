@@ -165,7 +165,7 @@
                         <div class="row">
                             <div class="ec-vendor-block-img ">
                                 <div class="ec-vendor-upload-detail">
-                                    <form id="name"  class="row g-3">
+                                    <form id="name<%=i%>"  class="row g-3">
                                        
                                         <div class="col-md-12 space-t-15">
                                             <label class="form-label">Address 1</label>
@@ -197,7 +197,7 @@
                                             <input type="text" name="id" style="display: none;" required class="form-control" value="<%=useraddress.addreses[i]._id%>">
                                         </div>
                                         <div class="col-md-12 space-t-15 pt-3">
-                                            <a ><button type="submit" class="btn btn-primary">Update</button></a>
+                                            <button type="submit" class="btn btn-primary" onclick="edit('<%=i%>','<%=user._id%>')">Update</button>
                                             <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
                                                 aria-label="Close">Close</a>
                                         </div>
@@ -262,26 +262,72 @@
         </div>
     </div>
 </div>
-<%- include('../partials/footer'); -%>
 
+<style>
+    .colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
 
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-       document.getElementById("name").addEventListener('submit',(e)=>{
-        e.preventDefault();
-        console.log("riyas")
-        let formData = new FormData(e.target)
-        let data = Object.fromEntries(formData)
-        axios.put('/update',{
-        data,
-        }).then((response)=>{
-            if(response.data.result){
-                Swal.fire('Address Edited')
-                // window.location.reload()
+    function edit(i,userId){
+        event.preventDefault()
+  
+     
+       $.ajax({
+        url:`/update?userId=${userId}`,
+        method:'put',
+        data:$('#name'+i).serialize(),
+        success:((res=>{
+            if(res.result){
+                const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-right',
+                iconColor: 'white',
+                customClass: {
+                    popup: 'colored-toast'
+            },
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+                })
+                Toast.fire({
+                icon: 'success',
+                title: 'Success'
+                })
+                setTimeout(myStopFunction, 1500);
+                    function myStopFunction() {
+                    location.reload()
+                    }
+            }else{
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-right',
+                    iconColor: 'white',
+                    customClass: {
+                        popup: 'colored-toast'
+                },
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true
+                })
+                Toast.fire({
+                icon: 'error',
+                title: 'Error'
+                })
             }
             
-        })  
+        }))
+       })
        
-    })
+    }
 </script>
 
+<%- include('../partials/footer'); -%>

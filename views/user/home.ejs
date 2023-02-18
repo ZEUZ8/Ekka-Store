@@ -435,7 +435,7 @@
                                             <ul class="sub-menu sub-menu-child">
                                                 <li><a href="/profile">User Profile</a></li>
                                                 <li><a href="/">History</a></li>
-                                                <li><a href="/wishlistqsael">Wishlist</a></li>
+                                                <li><a href="/wishlist">Wishlist</a></li>
                                                 <li><a href="trackOrder">Track Order</a></li>
                                                 <li><a href="/">Invoice</a></li>
                                             </ul>
@@ -640,7 +640,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="user-profile.html">User Profile</a></li>
                                         <li><a href="user-history.html">User History</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="/wishlist">Wishlist</a></li>
                                         <li><a href="track-order.html">Track Order</a></li>
                                         <li><a href="user-invoice.html">User Invoice</a></li>
                                     </ul>
@@ -920,15 +920,15 @@
                         <div class="row">
                             <%if(data.length>0){ %>
                                 <%data.forEach((data) => { %> 
-                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content">
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 ec-product-content " onclick="product('<%=data._id%>')">
                                 <div class="ec-product-inner">
                                     <div class="ec-product-hover"></div>
                                     <div class="ec-pro-image-outer">
                                         <div class="ec-pro-image">
                                             <a href="/product/<%=data._id%>" class="image">
-                                                <img class="main-image" src="/images/uploads/<%=data.image[0]%>"
+                                                <img class="main-image"  src="/images/uploads/<%=data.image[0]%>"
                                                     alt="Product" />
-                                                <img class="hover-image" src="/images/uploads/<%=data.image[1]%>"
+                                                <img class="hover-image"  src="/images/uploads/<%=data.image[1]%>"
                                                     alt="Product" />
                                             </a>
                                         </div>
@@ -2118,6 +2118,16 @@
     </div>
     <!--successfully toast end -->
 
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function product(id){
+            axios.get('/product/'+id)
+            .then((res)=>{
+                console.log("function called",id)
+            })
+        }
+    </script>
 
 
     <!-- Vendor JS -->

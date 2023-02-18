@@ -131,13 +131,11 @@ let admin_prduct_undelete = async (req, res) => {
 
 let single_product_showing = async (req, res) => {
   let id = req.params.id;
+  console.log("id gort inthe safe hander",id)
   const data = await Product.findOne({ _id: id });
-
-  const vendor = new RegExp(`^${data.vendor}`,"i")
   const category = new RegExp(`^${data.category}`,"i")
-  console.log(category,vendor)
+  console.log(data.category)
   const product = await Product.find({$and:[{ delete: { $ne: false } },{$or:[{category:category}]}]});
-  console.log(product)
   if (data) {
     res.render("user/singleProduct", { data, product });
   } else {
