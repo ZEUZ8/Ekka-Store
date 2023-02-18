@@ -1,4 +1,5 @@
  <%- include('../partials/header'); -%>
+ <script src="https://kit.fontawesome.com/c6164394bf.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="/admin/plugins/bootstrap/css/bootstrap.min.css" />
  <link rel="stylesheet" href="/admin/plugins/font-awesome/css/font-awesome.min.css" />
  <link rel="stylesheet" href="/admin/plugins/icomoon/style.css" />
@@ -119,7 +120,40 @@
                 </div>
             </div>
             <!-- end row -->
-    
+
+            <!-- route map row start -->
+            <div class="row g-xl-3">
+                <div class="col-lg-12 grid-margin">
+                    <div class="card card-white h-100">
+                        <div class="card-heading clearfix">
+                            <h4 class="card-title">Order Status</h4>
+                         
+                        </div>
+                     
+                        <div class="card-body ml-5">
+                           <div class="row"> 
+                            <div class="col-md-3">
+                                
+                                <%if(order.orderStatus == 'pending'){%>
+                                    <h3><span class="badge rounded-pill bg-soft-orange"><%=order.orderStatus%></span></h3>
+                                <%}else if(order.orderStatus == 'confirmed'){%>
+                                    <h3><span class="badge rounded-pill bg-info"><%=order.orderStatus%></span></h3>
+                                <%}else if(order.orderStatus == 'delivered'){%>  
+                                    <h3><span class="badge rounded-pill bg-soft-green"><%=order.orderStatus%></span></h3>  
+                                <%}else if(order.orderStatus == 'cancelled'){%>  
+                                    <h3><span class="badge rounded-pill bg-soft-pink"><%=order.orderStatus%></span></h3>
+                                <%}%> 
+                                
+                            </div>
+                            </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- route map row end -->
+
+
             <!-- row -->
             <div class="row g-xl-3">
                 <div class="col-xl-4 grid-margin">
@@ -211,22 +245,26 @@
                                     <tr>
                                         <th  scope="row">Cancel Order :</th>
                                         <%if(order.orderStatus == 'cancelled'){%>
-                                            <td> <a href=""><span onclick="cancelling('error')" class="badge rounded-pill bg-soft-orange">CANCEL ORDER</span></a></td>
+                                            <td> <a ><span onclick="cancelling('error')" class="badge rounded-pill bg-soft-orange">CANCEL ORDER</span></a></td>
                                         <%}else{%>
-                                            <td> <a href=""><span onclick="cancelling('<%=order._id%>')" class="badge rounded-pill bg-soft-pink">CANCEL ORDER</span></a></td>
+                                            <td> <a ><span onclick="cancelling('<%=order._id%>')" class="badge rounded-pill bg-soft-pink">CANCEL ORDER</span></a></td>
                                         <%}%>  
                                     </tr>
                                     <tr>
                                         <th  scope="row">RETURN :</th>
                                         <%if(order.orderStatus == 'delivered'){%>
-                                            <td> <a href=""><span onclick="returning('<%=order._id%>')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
+                                            <td> <a><span onclick="returning('<%=order._id%>')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
                                         <%}else{%>
-                                            <td> <a href=""><span onclick="returning('error')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
+                                            <td> <a><span onclick="returning('error')" class="badge rounded-pill bg-soft-orange">RETURN ORDER</span></a></td>
                                         <%}%>  
                                     </tr>
                                     <tr>
                                         <th  scope="row">Invoice :</th>
-                                        <td> <a href=""><span class="badge rounded-pill bg-info">DOWNLOAD</span></a></td>
+                                        <%if(order.orderStatus == 'delivered'){%>
+                                            <td> <a><span onclick="invoice('<%=order._id%>')" class="badge rounded-pill bg-info">DOWNLOAD</span></a></td>
+                                        <%}else{%>
+                                            <td> <a><span onclick="invoice('error')" class="badge rounded-pill bg-info">DOWNLOAD</span></a></td>
+                                        <%}%>  
                                     </tr>
                                     <tr>
                                         <th  scope="row">Back Home :</th>
@@ -281,13 +319,14 @@
             })
         }
     }
+
     //function for the item cancel the and showing alert if its already cancelled 
     async function cancelling(id){
         if(id == 'error'){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: `Item already Returned!`,
+                text: `Item already Cancelled!`,
             })
             console.log("error at the cancelig a profuct ")
         }else{
@@ -305,7 +344,7 @@
                 console.log("cancelled")
                 if (result.isConfirmed) {
                     Swal.fire(
-                    'Deleted!',
+                    'cancelled!',
                     'Your Order cancelled.',
                     'success'
                     )
