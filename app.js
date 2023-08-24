@@ -18,7 +18,7 @@ const { errorpage } = require("./controllers/userController");
 //connecting
 const url = process.env.dbURI
 connecting(url,function start(){
-  app.listen(3000)
+  app.listen("https://ekka-store.onrender.com")
 })
 
 // middleware

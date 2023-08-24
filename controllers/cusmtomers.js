@@ -202,7 +202,6 @@ const dialy_report = async(req,res)=>{
 }
 
 const chart = async(req,res)=>{
-    console.log("this is the test function and the ")
     try{
         console.log("try block fucntion")
         const report = await Order.aggregate([
@@ -215,8 +214,6 @@ const chart = async(req,res)=>{
             },
             {$sort:{'_id.date':1}}
         ])
-
-        console.log(report,'   this the at eh eroor')
         const dailySale = [];
         const dailyprofit = [];
         const date = [];
@@ -225,7 +222,6 @@ const chart = async(req,res)=>{
             dailyprofit.push(report[i].total*12/100)
             date.push(report[i]._id.date)
         }
-        console.log(dailyprofit,dailySale,date)
         res.json({status:true,dailyprofit,dailySale,date})
     }catch(err){
         console.log(err)
